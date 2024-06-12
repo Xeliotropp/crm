@@ -37,6 +37,7 @@
                     <input type="text" class="fields" id="additionalInfo">
                 </div>
             </div>
+        </form>
             <fieldset class="border p-2">
                 <legend class="w-auto">Обект</legend>
                 <div class="form-group row">

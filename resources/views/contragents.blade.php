@@ -53,7 +53,7 @@
                     <div>
                         <!--{ { $categories->links() } }-->
                     </div>
-                    <button class="btn btn-primary float-end" id="add">Добави нов</button>
+                    <button class="btn btn-primary" id="add">Добави нов</button>
                 </div>
             </div>
         </div>
