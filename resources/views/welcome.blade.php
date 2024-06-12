@@ -15,39 +15,38 @@
 </head>
 
 <body>
-    <div class="container create">
+    <div class="container create pt-3 pb-3">
         <form>
-            <div class="form-group row pt-3">
+            <div class="form-group row">
                 <label for="eik" class="col-sm-2 col-form-label">ЕИК</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="eik">
+                    <input type="text" class="fields" id="eik">
                 </div>
                 <label for="companyName" class="col-sm-2 col-form-label">Име на фирма</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="companyName">
+                    <input type="text" class="fields" id="companyName">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="contactPerson" class="col-sm-2 col-form-label">Лице за контакт</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="contactPerson">
+                    <input type="text" class="fields" id="contactPerson">
                 </div>
                 <label for="additionalInfo" class="col-sm-2 col-form-label">Допълнителна информация</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="additionalInfo">
+                    <input type="text" class="fields" id="additionalInfo">
                 </div>
             </div>
-
             <fieldset class="border p-2">
                 <legend class="w-auto">Обект</legend>
                 <div class="form-group row">
                     <label for="objectName" class="col-sm-2 col-form-label">Име на обекта</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="objectName">
+                        <input type="text" class="fields" id="objectName">
                     </div>
                     <label for="objectAddress" class="col-sm-2 col-form-label">Адрес на обекта</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="objectAddress">
+                        <input type="text" class="fields" id="objectAddress">
                     </div>
                 </div>
                 <hr>
@@ -98,17 +97,16 @@
                             <input class="form-check-input" type="checkbox" id="param11" value="option11">
                             <label class="form-check-label" for="param11">ДТЗ</label>
                         </div>
-                        <!-- Add remaining checkboxes similarly -->
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="measurementDate" class="col-sm-2 col-form-label">Дата на измерване</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="measurementDate">
+                        <input type="date" class="fields" id="measurementDate">
                     </div>
                     <label for="receiveBy" class="col-sm-2 col-form-label">ReceiveBy</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="receiveBy">
+                        <input type="text" class="fields" id="receiveBy">
                     </div>
                 </div>
                 <hr>
@@ -165,31 +163,33 @@
                 <div class="form-group row">
                     <label for="nextMeasurementDate" class="col-sm-2 col-form-label">Дата на следващо измерване</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="nextMeasurementDate">
+                        <input type="date" class="fields" id="nextMeasurementDate">
                     </div>
                     <label for="remindOn" class="col-sm-2 col-form-label">Напомняне на:</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="remindOn">
+                        <input type="date" class="fields" id="remindOn">
                     </div>
                 </div>
                 <hr>
                 <div class="form-group row mt-3">
                     <label for="certificateNumber" class="col-sm-2 col-form-label">№ на сертификат</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="certificateNumber">
+                        <input type="text" class="fields" id="certificateNumber">
                     </div>
                     <label for="certificateDate" class="col-sm-2 col-form-label">Дата на сертификат</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="certificateDate">
+                        <input type="date" class="fields" id="certificateDate">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="contractor" class="col-sm-2 col-form-label">Контрагент</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="contractor">
+                        <input type="text" class="fields" id="contractor">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary">Add new object</button>
+                <div class="center">
+                    <button type="button" class="btn btn-dark">Add new object</button>
+                </div>
             </fieldset>
 
             <fieldset class="border p-2 mt-4">
@@ -197,56 +197,58 @@
                 <div class="form-group row">
                     <label for="paymentMethod" class="col-sm-2 col-form-label">Начин на плащане</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="paymentMethod">
-                            <option>Bank</option>
-                            <option>Cash</option>
+                        <select class="fields" id="paymentMethod">
+                            <option>По банков път</option>
+                            <option>В брой</option>
                         </select>
                     </div>
                     <label for="amountWithoutVAT" class="col-sm-2 col-form-label">Сума без ДДС</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="amountWithoutVAT">
+                        <input type="text" class="fields" id="amountWithoutVAT">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="invoiceNumber" class="col-sm-2 col-form-label">Номер на фактура</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="invoiceNumber">
+                        <input type="text" class="fields" id="invoiceNumber">
                     </div>
                     <label for="invoiceDate" class="col-sm-2 col-form-label">Дата на фактура</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="invoiceDate">
+                        <input type="date" class="fields" id="invoiceDate">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="paid" class="col-sm-2 col-form-label">Платено</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="paid">
+                        <select class="fields" id="paid">
                             <option>Да</option>
                             <option>Не</option>
                         </select>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary">Add new entry</button>
+                <div class="center">
+                    <button type="button" class="btn btn-dark center">Add new entry</button>
+                </div>
             </fieldset>
 
             <div class="form-group row mt-4">
                 <label for="totalAmount" class="col-sm-2 col-form-label">Сума за контрагент</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="totalAmount">
+                    <input type="text" class="fields" id="totalAmount">
                 </div>
                 <label for="cashAmountWithoutVAT" class="col-sm-2 col-form-label">Сума в брой без ДДС</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="cashAmountWithoutVAT">
+                    <input type="text" class="fields" id="cashAmountWithoutVAT">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="bankAmountWithoutVAT" class="col-sm-2 col-form-label">Сума в банка без ДДС</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="bankAmountWithoutVAT">
+                    <input type="text" class="fields" id="bankAmountWithoutVAT">
                 </div>
                 <label for="receivedAmountWithoutVAT" class="col-sm-2 col-form-label">Реално постъпила сума без ДДС</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="receivedAmountWithoutVAT">
+                    <input type="text" class="fields" id="receivedAmountWithoutVAT">
                 </div>
             </div>
         </form>

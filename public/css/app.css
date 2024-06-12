@@ -18,5 +18,13 @@ form .btn {
     margin-right: 20px;
 }
 .create{
-    background-color: gray;
+    background-color:lightgray;
+}
+.fields{
+    width: 300px;
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
