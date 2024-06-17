@@ -16,6 +16,9 @@ class Clients extends Model
         'phone_number',
         'address',
         'additional_information',
-        'object'
+        'object_first',
+        'object_second',
+        'object_third',
+        'object_fourth',
     ];
 }

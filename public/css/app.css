@@ -28,3 +28,10 @@ form .btn {
     align-items: center;
     justify-content: center;
 }
+
+.navbar{
+    display: flex;
+    gap:3rem;
+    color:white;
+    
+}
