@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <h3>
                             Добавяне на клиент
-                            <a href="{{ url('pages/clients/create') }}"
+                            <a href="{{ url('pages/clients/') }}"
                                 class="btn btn-primary btn-sm text-white float-end">Назад</a>
                         </h3>
                     </div>

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('contragents', function(Blueprint $table){
             $table -> id()->autoIncrement();
-            $table -> string('contragent');
-            $table -> integer('company_identifier');
-            $table -> string('contact_person');
-            $table -> string('phone_number');
-            $table -> longText('additional_information') -> nullable();
+            $table -> string('contragent_name');
+            $table -> integer('contragent_company_identifier');
+            $table -> string('contragent_contact_person');
+            $table -> string('contragent_phone_number');
+            $table -> longText('contragent_additional_information') -> nullable();
             $table -> integer('commission_percentage');
             $table -> timestamps();
         });

@@ -14,22 +14,31 @@
                                 <th>ЕИК/Булстат</th>
                                 <th>Лице за Контакт</th>
                                 <th>Телефон</th>
-                                <th>Адрес</th>
                                 <th>Допълнителна информация</th>
                                 <th>Процент комисионна</th>
+                                <th>Действие</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($contragents as $contragent)
                                 <tr>
                                     <td>{{ $contragent->id }}</td>
-                                    <td>{{ $contragent->contragent }}</td>
-                                    <td>{{ $contragent->company_identifier }}</td>
-                                    <td>{{ $contragent->contact_person }}</td>
-                                    <td>{{ $contragent->phone_number }}</td>
-                                    <td>{{ $contragent->address }}</td>
-                                    <td>{{ $contragent->additional_information }}</td>
-                                    <td>{{ $contragent->comission_percentage }}</td>
+                                    <td>{{ $contragent->contragent_name }}</td>
+                                    <td>{{ $contragent->contragent_company_identifier }}</td>
+                                    <td>{{ $contragent->contragent_contact_person }}</td>
+                                    <td>{{ $contragent->contragent_phone_number }}</td>
+                                    <td>{{ $contragent->contragent_additional_information }}</td>
+                                    <td>{{ $contragent->commission_percentage }}</td>
+                                    <td>
+                                        <a href="{{ url('pages/contragents/' . $contragent->id . '/edit') }}"
+                                            class="btn btn-success btn-sm">
+                                            Редактиране
+                                        </a>
+                                        <a wire:click="deleteclient({{ $contragent->id }})" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                            class="btn btn-danger btn-sm">
+                                            Изтриване
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -38,7 +47,7 @@
                         {{ $contragents->links() }}
                     </div>
                     <div>
-                        <a class="btn btn-primary float-end" id="add">Добави нов</a>
+                        <a class="btn btn-primary float-end" id="add" href="/pages/contragents/create">Добави нов</a>
                     </div>
                 </div>
             </div>

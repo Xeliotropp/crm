@@ -35,20 +35,20 @@ class ClientsController extends Controller
     
         $client->save();
 
-        return redirect('/pages/clients')->with('message', 'Успешно добавяне на нов клиент!');
+        return redirect('/pages/clients')->with('success', 'Успешно добавяне на нов клиент!');
     }
 
     public function edit(Clients $client)
     {
         return view('pages.clients.edit', compact('client'));
+        
     }
-
+        
     public function update(ClientsFormRequest $request, $client)
     {
         $validatedData = $request->validated();
-
+        
         $client = Clients::findOrFail($client);
-
         $client->client = $validatedData['client'];
         $client->company_identifier = $validatedData['company_identifier'];
         $client->phone_number = $validatedData['phone_number'];
@@ -58,10 +58,9 @@ class ClientsController extends Controller
         $client->object_second = $validatedData['object_second'];
         $client->object_third = $validatedData['object_third'];
         $client->object_fourth = $validatedData['object_fourth'];
-        
+    
         $client->update();
-
-        return redirect('admin/Clients')->with('message', 'Успешно обновяване на категория!');
+        return redirect('/pages/clients')->with('success', 'Успешно обновяване на клиент!');
     }
 
 }
