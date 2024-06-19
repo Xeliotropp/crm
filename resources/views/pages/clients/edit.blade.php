@@ -13,7 +13,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('clients.update', ['client' => $client]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="/pages/clients/{{$client->id}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="row">
@@ -25,9 +25,9 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="companyId" class="fw-bold">ЕИК/ПИК/БУЛСТАТ*</label>
-                                    <input type="text" name="companyId" value="{{ old('companyId', $client->company_identifier) }}" class="form-control" id="company_identifier">
-                                    @error('companyId')
+                                    <label for="company_identifier" class="fw-bold">ЕИК/ПИК/БУЛСТАТ*</label>
+                                    <input type="text" name="company_identifier" value="{{ old('company_identifier', $client->company_identifier) }}" class="form-control" id="company_identifier">
+                                    @error('company_identifier')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
