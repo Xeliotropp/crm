@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contragents;
 use App\Http\Requests\ContragentsFormRequest;
-use App\Http\Requests\ContragentsUpdateFormRequest;
+use Illuminate\Http\Request;
+
 
 
 class ContragentsController extends Controller
@@ -33,25 +34,25 @@ class ContragentsController extends Controller
     
         $contragent->save();
 
-        return redirect('pages.contragents')->with('success', 'Успешно добавяне на нов контрагент!');
+        return redirect('/pages/contragents')->with('success', 'Успешно добавяне на нов контрагент!');
     }
 
     public function edit(Contragents $contragent){
-        return view('pages.contragents.edit');
+        return view('pages.contragents.edit', ['contragent' => $contragent]);
     }
+    public function update(Request $request, $id)
+    {   
+        $contragent = Contragents::find($id);
+        
+        $contragent->contragent_name = $request->input('contragent_name');
+        $contragent->contragent_company_identifier = $request->input('contragent_company_identifier');
+        $contragent->contragent_contact_person = $request->input('contragent_contact_person');
+        $contragent->contragent_phone_number = $request->input('contragent_phone_number');
+        $contragent->contragent_additional_information = $request->input('contragent_additional_information');
+        $contragent->commission_percentage = $request->input('commission_percentage');
 
-    public function update(ContragentsUpdateFormRequest $request, Contragents $contragent){
-        $contragent = Contragents::findOrFail($contragent);
-        $validatedData = $request->validated();
+        $contragent->save();
 
-        $contragent = Contragents::findOrFail($contragent);
-        $contragent->contragent_name = $validatedData['contragent_name'];
-        $contragent->company_identifier = $validatedData['contragent_company_identifier'];
-        $contragent->phone_number = $validatedData['contragent_phone_number'];
-        $contragent->additional_information = $validatedData['contragent_additional_information'];
-        $contragent->commission_percentage = $validatedData['commission_percentage'];
-
-
-        return redirect('/pages/contragents')->with('success', 'Успешно обновяване на контрагент!');
+        return redirect('/pages/contragents')->with('success', 'Успешно редактиране на контрагент');
     }
 }

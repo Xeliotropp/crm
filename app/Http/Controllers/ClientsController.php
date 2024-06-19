@@ -44,22 +44,9 @@ class ClientsController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        // $data = $request->validate([
-        //     'client' => 'required|string',
-        //     'company_identifier' => 'required|integer',
-        //     'contact_person' => 'required|string',
-        //     'phone_number' => 'required|string',
-        //     'address' => 'required|string',
-        //     'additional_information' => 'nullable',
-        //     'object_first' => 'required|string',
-        //     'object_second' => 'nullable|string',
-        //     'object_third' => 'nullable|string',
-        //     'object_fourth' => 'nullable|string'
-
-        // ]);
-        
+    {   
         $client = Clients::find($id);
+        
         $client->client = $request->input('client');
         $client->company_identifier = $request->input('company_identifier');
         $client->contact_person = $request->input('contact_person');
@@ -70,8 +57,6 @@ class ClientsController extends Controller
         $client->object_second = $request->input('object_second');
         $client->object_third = $request->input('object_third');
         $client->object_fourth = $request->input('object_fourth');
-
-
 
         $client->save();
 

@@ -21,5 +21,5 @@ Route::put('/pages/clients/{id}', [ClientsController::class, 'update'])->name('c
 Route::get('/pages/contragents', [ContragentsController::class, 'index'])->name('contragents.index');
 Route::get('/pages/contragents/create', [ContragentsController::class, 'create'])->name('contragents.create');
 Route::post('/pages/contragents', [ContragentsController::class, 'store'])->name('contragents.store');
-Route::get('/pages/contragents/{client}/edit', [ContragentsController::class, 'edit'])->name('contragents.edit');
-Route::put('/pages/contragents/{client}/update', [ContragentsController::class, 'update'])->name('contragents.update');
+Route::get('/pages/contragents/{contragent}/edit', [ContragentsController::class, 'edit'])->name('contragents.edit');
+Route::put('/pages/contragents/{id}', [ContragentsController::class, 'update'])->name('contragents.update');
