@@ -3,16 +3,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Category Delete</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Изтриване на клиент</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form wire:submit.prevent="destroyClient">
                     <div class="modal-body">
-                        <h6>Are you sure you want to delete this data?</h6>
+                        <h6>Сигурни ли сте, че искате да изтриете записа?</h6>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Yes, Delete!</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Да, изтрий!</button>
                     </div>
                 </form>
             </div>
