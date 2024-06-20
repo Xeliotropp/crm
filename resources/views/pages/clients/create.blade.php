@@ -24,7 +24,7 @@
                                 </div>
         
                                 <div class="col-md-6 mb-3">
-                                    <label for="company_identifier" class="fw-bold">ЕИК/ПИК/БУЛСТАТ*</label>
+                                    <label for="company_identifier" class="fw-bold">ЕИК*</label>
                                     <input type="text" name="company_identifier" class="form-control">
                                     @error('company_identifier') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>

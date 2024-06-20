@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('clients', function(Blueprint $table){
             $table -> id()->autoIncrement();
             $table -> string('client');
-            $table -> integer('company_identifier');
+            $table -> string('company_identifier');
             $table -> string('contact_person');
             $table -> string('phone_number');
             $table -> string('address');

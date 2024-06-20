@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <h3>
                             Редактиране на клиент
-                            <a href="{{ url('pages/client') }}" class="btn btn-primary btn-sm text-white float-end">Назад</a>
+                            <a href="{{ url('pages/clients') }}" class="btn btn-primary btn-sm text-white float-end">Назад</a>
                         </h3>
                     </div>
                     <div class="card-body">
@@ -25,7 +25,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="company_identifier" class="fw-bold">ЕИК/ПИК/БУЛСТАТ*</label>
+                                    <label for="company_identifier" class="fw-bold">ЕИК*</label>
                                     <input type="text" name="company_identifier" value="{{ old('company_identifier', $client->company_identifier) }}" class="form-control" id="company_identifier">
                                     @error('company_identifier')
                                         <small class="text-danger">{{ $message }}</small>

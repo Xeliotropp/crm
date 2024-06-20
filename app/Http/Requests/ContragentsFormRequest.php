@@ -28,7 +28,8 @@ class ContragentsFormRequest extends FormRequest
             ],
             'contragent_company_identifier' => [
                 'required',
-                'integer',
+                'string',
+                'max:15'
             ],
             'contragent_contact_person' => [
                 'required',
@@ -36,7 +37,8 @@ class ContragentsFormRequest extends FormRequest
             ],
             'contragent_phone_number' => [
                 'required',
-                'string'
+                'string',
+                'max:10'
             ],
             'contragent_additional_information' => [
                 'nullable',

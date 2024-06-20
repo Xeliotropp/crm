@@ -20,19 +20,7 @@ class ClientsController extends Controller
 
     public function store(ClientsFormRequest $request)
     {
-        $data = $request->validate([
-            'client' => 'required|string',
-            'company_identifier' => 'required|integer',
-            'contact_person' => 'required|string',
-            'phone_number' => 'required|string',
-            'address' => 'required|string',
-            'additional_information' => 'nullable',
-            'object_first' => 'required|string',
-            'object_second' => 'nullable|string',
-            'object_third' => 'nullable|string',
-            'object_fourth' => 'nullable|string'
-
-        ]);
+        $data = $request->validated();
         $newClient = Clients::create($data);
 
         return redirect('/pages/clients')->with('success', 'Успешно добавяне на нов клиент!');

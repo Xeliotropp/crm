@@ -28,7 +28,8 @@ class ClientsFormRequest extends FormRequest
             ],
             'company_identifier' => [
                 'required',
-                'integer',
+                'string',
+                'max:15'
             ],
             'contact_person' => [
                 'required',
@@ -36,7 +37,8 @@ class ClientsFormRequest extends FormRequest
             ],
             'phone_number' => [
                 'required',
-                'string'
+                'string',
+                'max:10'
             ],
             'address' => [
                 'required',
