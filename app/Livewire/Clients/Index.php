@@ -29,6 +29,5 @@ class Index extends Component
         $client = Clients::find($this->clientId);
         $client->delete();
         session()->flash('message', 'Успешно изтрит клиент!');
-        $this->dispatchBrowserEvent('close-modal');
     }
 }

@@ -15,8 +15,8 @@ Route::get('/pages/clients/create', [ClientsController::class, 'create'])->name(
 Route::post('/pages/clients', [ClientsController::class, 'store'])->name('clients.store');
 Route::get('/pages/clients/{client}/edit', [ClientsController::class, 'edit'])->name('clients.edit');
 Route::put('/pages/clients/{id}', [ClientsController::class, 'update'])->name('clients.update');
+Route::get('/pages/clients/delete/{id}', [ClientsController::class, 'destroy'])->name('clients.destroy');
 
-//Route::resource('pages/contragents', ContragentsController::class);
 
 Route::get('/pages/contragents', [ContragentsController::class, 'index'])->name('contragents.index');
 Route::get('/pages/contragents/create', [ContragentsController::class, 'create'])->name('contragents.create');
