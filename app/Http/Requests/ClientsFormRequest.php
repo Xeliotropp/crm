@@ -62,7 +62,23 @@ class ClientsFormRequest extends FormRequest
             'object_fourth' => [
                 'nullable',
                 'string'
-            ]
+            ],
+            'adress_object_1' => [
+                'nullable',
+                'string',
+            ],
+            'adress_object_2' => [
+                'nullable',
+                'string',
+            ],
+            'adress_object_3' => [
+                'nullable',
+                'string',
+            ],
+            'adress_object_4' => [
+                'nullable',
+                'string',
+            ],
         ];
     }
 }

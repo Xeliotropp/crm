@@ -13,6 +13,7 @@ Route::get('/', function () {
 Route::get('/pages/clients', [ClientsController::class, 'index'])->name('clients.index');
 Route::get('/pages/clients/create', [ClientsController::class, 'create'])->name('clients.create');
 Route::post('/pages/clients', [ClientsController::class, 'store'])->name('clients.store');
+Route::get('/pages/clients/client/{client}', [ClientsController::class, 'clientView'])->name('client.view');
 Route::get('/pages/clients/{client}/edit', [ClientsController::class, 'edit'])->name('clients.edit');
 Route::put('/pages/clients/{id}', [ClientsController::class, 'update'])->name('clients.update');
 Route::get('/pages/clients/delete/{id}', [ClientsController::class, 'destroy'])->name('clients.destroy');

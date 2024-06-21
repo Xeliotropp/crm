@@ -41,13 +41,13 @@
                                 @foreach ($clients as $client)
                                     <tr>
                                         <td>{{ $client->id }}</td>
-                                        <td>{{ $client->client }}</td>
+                                        <td><a href="/pages/clients" style="text-decoration:none;">{{ $client->client }}</a></td>
                                         <td>{{ $client->company_identifier }}</td>
                                         <td>{{ $client->contact_person }}</td>
                                         <td>{{ $client->phone_number }}</td>
                                         <td>{{ $client->address }}</td>
                                         <td>{{ $client->additional_information }}</td>
-                                        <td>{{ $client->object_first }}</td>
+                                        <td>{{ $client->object_first }}</td>  
                                         <td>
                                             <a href="{{ url('pages/clients/' . $client->id . '/edit') }}"
                                                 class="btn btn-success btn-sm">

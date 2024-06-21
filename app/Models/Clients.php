@@ -20,5 +20,9 @@ class Clients extends Model
         'object_second',
         'object_third',
         'object_fourth',
+        'adress_object_1',
+        'adress_object_2',
+        'adress_object_3',
+        'adress_object_4',
     ];
 }

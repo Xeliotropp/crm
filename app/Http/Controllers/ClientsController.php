@@ -45,6 +45,10 @@ class ClientsController extends Controller
         $client->object_second = $request->input('object_second');
         $client->object_third = $request->input('object_third');
         $client->object_fourth = $request->input('object_fourth');
+        $client->adress_object_1 = $request->input('adress_object_1');
+        $client->adress_object_2 = $request->input('adress_object_2');
+        $client->adress_object_3 = $request->input('adress_object_3');
+        $client->adress_object_4 = $request->input('adress_object_4');
 
         $client->save();
 

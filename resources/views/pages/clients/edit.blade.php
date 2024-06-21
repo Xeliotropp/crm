@@ -59,31 +59,64 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="object_first" class="fw-bold">Обект 1*</label>
                                     <input name="object_first" type="text" class="form-control" value="{{ old('object_first', $client->object_first) }}">
                                     @error('object_first')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="adress_object_1">Адрес за обект 1</label>
+                                    <input name = "adress_object_1" type="text" class="form-control" value="{{ old('adress_object_1', $client->adress_object_1) }}">
+                                    @error('adress_object_1')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
                                     <label for="object_second">Обект 2</label>
-                                    <input name="object_second" type="text" class="form-control" value="{{ old('object_second', $client->object_second) }}">
+                                    <input name = "object_second" type="text" class="form-control" value="{{ old('object_first', $client->object_second) }}">
                                     @error('object_second')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-3">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="adress_object_2">Адрес за обект 2</label>
+                                    <input name = "adress_object_2" type="text" class="form-control" value="{{ old('adress_object_2', $client->adress_object_2) }}">
+                                    @error('adress_object_2')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 mb-3">
                                     <label for="object_third">Обект 3</label>
-                                    <input name="object_third" type="text" class="form-control" value="{{ old('object_third', $client->object_third) }}">
+                                    <input name = "object_third" type="text" class="form-control" value="{{ old('object_first', $client->object_third) }}">
                                     @error('object_third')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-3">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="adress_object_3">Адрес за обект 3</label>
+                                    <input name = "adress_object_3" type="text" class="form-control" value="{{ old('adress_object_1', $client->adress_object_3) }}">
+                                    @error('adress_object_3')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 mb-3">
                                     <label for="object_fourth">Обект 4</label>
-                                    <input name="object_fourth" type="text" class="form-control" value="{{ old('object_fourth', $client->object_fourth) }}">
+                                    <input name = "object_fourth" type="text" class="form-control" value="{{ old('object_first', $client->object_fourth) }}">
                                     @error('object_fourth')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="adress_object_4">Адрес за обект 4</label>
+                                    <input name = "adress_object_4" type="text" class="form-control" value="{{ old('adress_object_1', $client->adress_object_4) }}">
+                                    @error('adress_object_4')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
