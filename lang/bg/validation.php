@@ -134,7 +134,7 @@ return [
     'prohibited_unless' => ':attribute е забранено, освен ако :other не е в :values.',
     'prohibits' => ':attribute забранява :other да присъства.',
     'regex' => 'Форматът на :attribute е невалиден.',
-    'required' => 'Полето е задължително!*',
+    'required' => 'Полето :attribute е задължително!*',
     'required_array_keys' => ':attribute трябва да съдържа записи за: :values.',
     'required_if' => ':attribute е задължително, когато :other е :value.',
     'required_if_accepted' => ':attribute е задължително, когато :other е прието.',
@@ -189,6 +189,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'client' => 'име на клиента',
+        'contact_person' => 'лице за контакт',
+        'company_identifier' => 'ЕИК',
+        'phone_number' => 'номер за връзка',
+        'address' => 'адрес',
+        'object_first' => 'обект',
+        'contragent_name' => 'име на контрагента',
+        'contragent_contact_person' => 'лице за контакт',
+        'contragent_company_identifier' => 'ЕИК',
+        'contragent_phone_number' => 'номер за връзка',
+        'commission_percentage' => 'процент комисионна'
+    ],
 
 ];
