@@ -24,10 +24,17 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label for="company_identifier" class="fw-bold">ЕИК*</label>
                                     <input type="text" name="company_identifier" value="{{ old('company_identifier', $client->company_identifier) }}" class="form-control" id="company_identifier">
                                     @error('company_identifier')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="vat_number">ЗДДС №</label>
+                                    <input type="text" name="vat_number" class="form-control" value="{{ old('vat_number', $client->vat_number) }}">
+                                    @error('vat_number')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -73,7 +80,7 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="col-md-6 mb-3">
                                     <label for="object_second">Обект 2</label>
                                     <input name = "object_second" type="text" class="form-control" value="{{ old('object_first', $client->object_second) }}">

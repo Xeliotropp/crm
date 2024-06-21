@@ -24,15 +24,21 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-
-                                <div class="col-md-6 mb-3">
+                                
+                                <div class="col-md-3 mb-3">
                                     <label for="company_identifier" class="fw-bold">ЕИК*</label>
                                     <input type="text" name="company_identifier" class="form-control">
                                     @error('company_identifier')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-
+                                <div class="col-md-3 mb-3">
+                                    <label for="vat_number">ЗДДС №</label>
+                                    <input type="text" name="vat_number" class="form-control">
+                                    @error('vat_number')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="contact_person" class="fw-bold">Лице за контакт*</label>
                                     <input name="contact_person" type="text" class="form-control"></input>

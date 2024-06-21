@@ -27,6 +27,7 @@ class ContragentsController extends Controller
 
         $contragent->contragent_name = $validatedData['contragent_name'];
         $contragent->contragent_company_identifier = $validatedData['contragent_company_identifier'];
+        $contragent->vat_number = $validatedData['vat_number'];
         $contragent->contragent_contact_person = $validatedData['contragent_contact_person'];
         $contragent->contragent_phone_number = $validatedData['contragent_phone_number'];
         $contragent->contragent_additional_information = $validatedData['contragent_additional_information'];
@@ -46,6 +47,7 @@ class ContragentsController extends Controller
         
         $contragent->contragent_name = $request->input('contragent_name');
         $contragent->contragent_company_identifier = $request->input('contragent_company_identifier');
+        $contragent->vat_number = $request->input('vat_number');
         $contragent->contragent_contact_person = $request->input('contragent_contact_person');
         $contragent->contragent_phone_number = $request->input('contragent_phone_number');
         $contragent->contragent_additional_information = $request->input('contragent_additional_information');

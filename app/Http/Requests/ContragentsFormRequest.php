@@ -31,6 +31,11 @@ class ContragentsFormRequest extends FormRequest
                 'string',
                 'max:15'
             ],
+            'vat_number' => [
+                'nullable',
+                'string',
+                'max:17'
+            ],
             'contragent_contact_person' => [
                 'required',
                 'string'

@@ -200,7 +200,8 @@ return [
         'contragent_contact_person' => 'лице за контакт',
         'contragent_company_identifier' => 'ЕИК',
         'contragent_phone_number' => 'номер за връзка',
-        'commission_percentage' => 'процент комисионна'
+        'commission_percentage' => 'процент комисионна',
+        'vat_number' => 'ЗДДС №'
     ],
 
 ];

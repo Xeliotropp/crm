@@ -19,9 +19,28 @@ class ClientsController extends Controller
     }
 
     public function store(ClientsFormRequest $request)
-    {
-        $data = $request->validated();
-        $newClient = Clients::create($data);
+    { 
+        $validatedData = $request->validated();
+
+        $client = new Clients();
+
+        $client->client = $validatedData['client'];
+        $client->company_identifier = $validatedData['company_identifier'];
+        $client->vat_number = $validatedData['vat_number'];
+        $client->contact_person = $validatedData['contact_person'];
+        $client->phone_number = $validatedData['phone_number'];
+        $client->address = $validatedData['address'];
+        $client->additional_information = $validatedData['additional_information'];
+        $client->object_first = $validatedData['object_first'];
+        $client->object_second = $validatedData['object_second'];
+        $client->object_third = $validatedData['object_third'];
+        $client->object_fourth = $validatedData['object_fourth'];
+        $client->adress_object_1 = $validatedData['adress_object_1'];
+        $client->adress_object_2 = $validatedData['adress_object_2'];
+        $client->adress_object_3 = $validatedData['adress_object_3'];
+        $client->adress_object_4 = $validatedData['adress_object_4'];
+
+        $client->save();
 
         return redirect('/pages/clients')->with('success', 'Успешно добавяне на нов клиент!');
     }
@@ -37,6 +56,7 @@ class ClientsController extends Controller
         
         $client->client = $request->input('client');
         $client->company_identifier = $request->input('company_identifier');
+        $client->vat_number = $request->input('vat_number');
         $client->contact_person = $request->input('contact_person');
         $client->phone_number = $request->input('phone_number');
         $client->address = $request->input('address');

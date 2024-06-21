@@ -31,6 +31,11 @@ class ClientsFormRequest extends FormRequest
                 'string',
                 'max:15'
             ],
+            'vat_number' => [
+                'nullable',
+                'string',
+                'max:17'
+            ],
             'contact_person' => [
                 'required',
                 'string'

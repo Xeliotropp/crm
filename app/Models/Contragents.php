@@ -12,6 +12,7 @@ class Contragents extends Model
     protected $fillable = [
         'contragent',
         'company_identifier',
+        'vat_number',
         'contact_person',
         'phone_number',
         'additional_information',
