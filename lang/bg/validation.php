@@ -201,7 +201,9 @@ return [
         'contragent_company_identifier' => 'ЕИК',
         'contragent_phone_number' => 'номер за връзка',
         'commission_percentage' => 'процент комисионна',
-        'vat_number' => 'ЗДДС №'
+        'vat_number' => 'ЗДДС №',
+        'email' => 'имейл',
+        'password' => 'парола'
     ],
 
 ];
