@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-14 mt-4">
                 <div class="card">
@@ -33,7 +33,14 @@
                                     <th>Телефон</th>
                                     <th>Адрес</th>
                                     <th>Допълнителна информация</th>
-                                    <th>Обект</th>
+                                    <th>Обект 1</th>
+                                    <th>Обект 1 адрес</th>
+                                    <th>Обект 2</th>
+                                    <th>Обект 2 адрес</th>
+                                    <th>Обект 3</th>
+                                    <th>Обект 3 адрес</th>
+                                    <th>Обект 4</th>
+                                    <th>Обект 4 адрес</th>
                                     <th>Действие</th>
                                 </tr>
                             </thead>
@@ -41,13 +48,21 @@
                                 @foreach ($clients as $client)
                                     <tr>
                                         <td>{{ $client->id }}</td>
-                                        <td><a href="/pages/clients" style="text-decoration:none;">{{ $client->client }}</a></td>
+                                        <td>{{ $client->client }}</td>
                                         <td>{{ $client->company_identifier }}</td>
                                         <td>{{ $client->contact_person }}</td>
                                         <td>{{ $client->phone_number }}</td>
                                         <td>{{ $client->address }}</td>
                                         <td>{{ $client->additional_information }}</td>
                                         <td>{{ $client->object_first }}</td>  
+                                        <td>{{ $client->adress_object_1 }}</td>  
+                                        <td>{{ $client->object_second }}</td>
+                                        <td>{{ $client->adress_object_2 }}</td>  
+                                        <td>{{ $client->object_third }}</td>
+                                        <td>{{ $client->adress_object_3 }}</td>  
+                                        <td>{{ $client->object_fourth }}</td>
+                                        <td>{{ $client->adress_object_4 }}</td>  
+
                                         <td>
                                             <a href="{{ url('pages/clients/' . $client->id . '/edit') }}"
                                                 class="btn btn-success btn-sm">

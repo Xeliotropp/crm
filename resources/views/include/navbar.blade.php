@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <div class="bg-primary d-flex gap-4" style="width: 100%; height:50px">
-    <header class="container">
+    <header class="container-fluid">
         <div>
             <nav>
                 <ul class="">
@@ -13,6 +13,12 @@
                     <a class = "text-white" href="/pages/contragents" style="text-decoration:none"><i
                             class="bi bi-person"></i>&nbsp;Контрагенти</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class = "text-white" href="/pages/task-create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class = "text-white" href="/pages/payments" style="text-decoration:none"><i class="bi bi-credit-card"></i>&nbsp;Плащания</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class = "text-white" href="/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @auth
                         <div class="float-end ml-4">
                             <div style = "color:white">

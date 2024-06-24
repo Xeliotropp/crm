@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-14 mt-4">
                 <div class="card">
