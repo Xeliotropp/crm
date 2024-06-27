@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContragentsController;
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -19,6 +20,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pages/contragents', [ContragentsController::class, 'store'])->name('contragents.store');
     Route::get('/pages/contragents/{contragent}/edit', [ContragentsController::class, 'edit'])->name('contragents.edit');
     Route::put('/pages/contragents/{id}', [ContragentsController::class, 'update'])->name('contragents.update');
+
+    Route::get('/pages/tasks', [TasksController::class,'index'])->name('tasks.index');
+    Route::get('/pages/tasks/create', [TasksController::class,'create'])->name('tasks.create');
 });
 Auth::routes();
 

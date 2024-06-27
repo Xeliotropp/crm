@@ -15,8 +15,6 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class = "text-white" href="/pages/task-create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/pages/payments" style="text-decoration:none"><i class="bi bi-credit-card"></i>&nbsp;Плащания</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class = "text-white" href="/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @auth
