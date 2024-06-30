@@ -203,7 +203,8 @@ return [
         'commission_percentage' => 'процент комисионна',
         'vat_number' => 'ЗДДС №',
         'email' => 'имейл',
-        'password' => 'парола'
+        'password' => 'парола',
+        'wayOfShowingDocumentation' => 'начин на предоставяне на документация'
     ],
 
 ];

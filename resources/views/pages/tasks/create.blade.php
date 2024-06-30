@@ -15,11 +15,11 @@
                     <form action="{{ url('pages/tasks') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="d-flex">
-                            <div class="col-md-6">
+                            <div class="col-md-5 mx-5">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="clientId" class="fw-bold">Клиент*</label>
-                                        <select wire:model="selectedClient" id="clientId" name="clientId" class="form-control">
+                                        <select name="clientId" class="form-control">
                                             <option value="">Избери клиент</option>
                                             @foreach ($clients as $client)
                                                 <option value="{{ $client->id }}">{{ $client->client }}</option>
@@ -30,43 +30,39 @@
             
                                     <div class="col-md-12 mb-3">
                                         <label for="Object1" class="fw-bold">Адрес на обекта*</label>
-                                            <input type="text" class="form-control" value="{{$client->object_first}}"></input>
+                                        <input type="text" class="form-control">
                                         @error('adressObject1') <small class="text-danger">{{ $message }}</small> @enderror
                                     </div>
-    
                                     <div class="col-md-12 mb-3">
                                         <label for="adressObject2">Втори адрес на обекта</label>
-                                        <select name="adressObject2" class="form-control">
-                                            @foreach ($clients as $client)
-                                            <option value="{{$client->id}}">{{$client->adress_object_2}}</option>
-                                           @endforeach
-                                        </select>
+                                        <input type="text" class="form-control">
                                         @error('adressObject3') <small class="text-danger">{{ $message }}</small> @enderror
                                     </div>
     
                                     <div class="col-md-12 mb-3">
                                         <label for="adressObject3">Трети адрес на обекта</label>
-                                        <select name="adressObject3" class="form-control">
-                                            @foreach ($clients as $client)
-                                            <option value="{{$client->id}}">{{$client->adress_object_3}}</option>
-                                           @endforeach
-                                        </select>
+                                        <input type="text" class="form-control">
                                         @error('adressObject3') <small class="text-danger">{{ $message }}</small> @enderror
                                     </div>
     
                                     <div class="col-md-12 mb-3">
                                         <label for="adressObject4">Четвърти адрес на обекта</label>
-                                        <select name="adressObject4" class="form-control">
-                                            @foreach ($clients as $client)
-                                            <option value="{{$client->id}}">{{$client->adress_object_4}}</option>
-                                           @endforeach
-                                        </select>
+                                        <input type="text" class="form-control">
                                         @error('adressObject4') <small class="text-danger">{{ $message }}</small> @enderror
                                     </div>
-        
+                                    <div class="col-md-12 mb-3">
+                                        <label for="clientId" class="fw-bold">Контрагент*</label>
+                                        <select name="clientId" class="form-control">
+                                            <option value="">Избери контрагент</option>
+                                            @foreach ($contragents as $contragent)
+                                                <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('clientId') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
                                     <div class="h-25 d-flex gap-5 ">
                                         <div class="mb-3 pe-5">
-                                            <label for="certificateDate" class="fw-bold">Дата на следващо измерване*</label>
+                                            <label for="certificateDate" class="fw-bold">Дата на измерване*</label>
                                             <input name = "certificateDate" type="date" class="form-control">   
                                             @error('certificateDate') <small class="text-danger">{{ $message }}</small> @enderror   
                                         </div>
@@ -104,9 +100,6 @@
                                             <input name="dtz" type="checkbox"></input>&nbsp;
                                         </div>
                                     </div>
-            
-                                   
-        
                                     <div class="col-md-12 mb-3">
                                         <label for="wayOfShowingDocumentation" class="fw-bold">Начин на предоставяне на документация</label>
                                         <input type="text" name="wayOfShowingDocumentation" class="form-control" rows="3"></input>
@@ -169,16 +162,49 @@
                             <!-- vertical line-->
                             <div class="vr mx-5" >&nbsp;</div>
                             <!-- vertical line-->
-                            <div class="col-md-6">
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
-                                <p>test</p>
+                            <div class="col-md-5 mx-5">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="invoice" class="fw-bold">Номер на фактура*</label>
+                                        <input type="text" class="form-control">
+                                        @error('invoice') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+            
+                                    <div class="col-md-12 mb-3">
+                                        <label for="invoice_date" class="fw-bold">Дата на фактура*</label>
+                                        <input type="date" class="form-control">
+                                        @error('invoice_date') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="payment_method" class="fw-bold">Начин на плащане*</label>
+                                        <input type="text" value="В брой | С карта" class="form-control">
+                                        @error('payment_method') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+    
+                                    <div class="col-md-12 mb-3">
+                                        <label for="price_without_vat class="fw-bold"">Сума без ДДС*</label>
+                                        <input type="number" class="form-control" id="sum_without_vat">
+                                        @error('price_without_vat') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+    
+                                    <div class="col-md-12 mb-3">
+                                        <label for="paid" class="fw-bold">Платено*</label>
+                                        <input type="checkbox"">
+                                        @error('paid') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+        
+                                    <div class="h-25 d-flex gap-5 ">
+                                        <div class="mb-3 pe-5">
+                                            <label for="contragent_sum" class="fw-bold class="fw-bold"">Сума на контрагент*</label>
+                                            <input name = "contragent_sum" type="number" class="form-control">   
+                                            @error('contragent_sum') <small class="text-danger">{{ $message }}</small> @enderror   
+                                        </div>
+                                        <div class="ms-5 ps-5">
+                                            <label for="total_sum" class="fw-bold">Релно постъпила сума без ДДС*</label>
+                                            <input name="total_sum" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">

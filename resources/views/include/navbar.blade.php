@@ -13,7 +13,7 @@
                     <a class = "text-white" href="/pages/contragents" style="text-decoration:none"><i
                             class="bi bi-person"></i>&nbsp;Контрагенти</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/pages/task-create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
+                    <a class = "text-white" href="/pages/tasks/create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class = "text-white" href="/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

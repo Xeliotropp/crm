@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/pages/tasks', [TasksController::class,'index'])->name('tasks.index');
     Route::get('/pages/tasks/create', [TasksController::class,'create'])->name('tasks.create');
+    Route::post('/pages/tasks', [TasksController::class,'store'])->name('tasks.store');
 });
 Auth::routes();
 
