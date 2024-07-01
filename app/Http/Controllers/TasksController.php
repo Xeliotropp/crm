@@ -23,6 +23,13 @@ class TasksController extends Controller
 
         $task = new Tasks();
 
+        $task->client = $validatedData["client"];
+        $task->client_address_1 = $validatedData["client_address_1"];
+        $task->client_address_2 = $validatedData["client_address_2"];
+        $task->client_address_3 = $validatedData["client_address_3"];
+        $task->client_address_4 = $validatedData["client_address_4"];
+
+        $task->contragent = $validatedData["contragent"];
         $task->dateOfMeasurment = $validatedData["dateOfMeasurment"];
 
         $task->mk = $validatedData["mk"];

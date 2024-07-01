@@ -10,6 +10,12 @@ class Tasks extends Model
     use HasFactory;
 
     protected $fillable = [
+        "client",
+        "client_address_1",
+        "client_address_2",
+        "client_address_3",
+        "client_address_4",
+        "contragent",
         "dateOfMeasurement",
         "mk",
         "osv",

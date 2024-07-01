@@ -26,28 +26,28 @@
                                         <small id="clientIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="object1" class="fw-bold">Адрес на обекта*</label>
-                                        <input type="text" class="form-control" id="object1" name="object1">
+                                        <label for="client_address_1" class="fw-bold">Адрес на обекта*</label>
+                                        <input type="text" class="form-control" id="object1" name="client_address_1" readonly>
                                         <small id="object1Error" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="object2">Втори адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object2" name="object2">
+                                        <label for="client_address_2">Втори адрес на обекта</label>
+                                        <input type="text" class="form-control" id="object2" name="client_address_2" readonly>
                                         <small id="object2Error" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="object3">Трети адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object3" name="object3">
+                                        <label for="client_address_3">Трети адрес на обекта</label>
+                                        <input type="text" class="form-control" id="object3" name="client_address_3" readonly>
                                         <small id="object3Error" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="object4">Четвърти адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object4" name="object4">
+                                        <label for="client_address_4">Четвърти адрес на обекта</label>
+                                        <input type="text" class="form-control" id="object4" name="client_address_4" readonly>
                                         <small id="object4Error" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <select id="contragentId" name="contragentId" class="form-control">
+                                        <select id="contragentId" name="contragent" class="form-control">
                                             <option value="">Избери контрагент</option>
                                             @foreach ($contragents as $contragent)
                                                 <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
