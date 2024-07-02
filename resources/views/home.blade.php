@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<p class="text-danger fw-bold text-center h1">ВСЕ ОЩЕ НЕ РАБОТИ ИЗЦЯЛО!</p>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

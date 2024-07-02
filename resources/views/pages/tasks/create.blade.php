@@ -2,6 +2,7 @@
 @section('title', 'Създаване на задача')
 
 @section('content')
+<p class="text-danger fw-bold text-center h1">ВСЕ ОЩЕ НЕ РАБОТИ ИЗЦЯЛО!</p>
 <div class="container-fluid mt-5 pd-5">
     <div class="row">
         <div class="col-md-12">

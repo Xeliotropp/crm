@@ -18,6 +18,7 @@
             </div>
         </div>
     </div>
+    <p class="text-danger fw-bold text-center h1">ВСЕ ОЩЕ НЕ РАБОТИ ИЗЦЯЛО!</p>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-14 mt-4">

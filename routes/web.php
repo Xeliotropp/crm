@@ -5,7 +5,6 @@ use App\Http\Controllers\ContragentsController;
 use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Livewire\Tasks\Create as TaskCreate;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/pages/clients', [ClientsController::class, 'index'])->name('clients.index');
@@ -36,7 +35,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 /*
