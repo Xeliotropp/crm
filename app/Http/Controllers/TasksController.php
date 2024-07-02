@@ -83,4 +83,13 @@ class TasksController extends Controller
             'contragent_id' => $client->contragent_id,
         ]);
     }
+
+    public function getContragentData($id)
+{
+    $contragent = Contragents::findOrFail($id);
+    return response()->json([
+        'commission_percentage' => $contragent->commission_percentage,
+        // You can include other fields here if needed
+    ]);
+}
 }

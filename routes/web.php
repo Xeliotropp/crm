@@ -21,10 +21,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pages/contragents/{contragent}/edit', [ContragentsController::class, 'edit'])->name('contragents.edit');
     Route::put('/pages/contragents/{id}', [ContragentsController::class, 'update'])->name('contragents.update');
 
-    Route::get('/pages/tasks', [TasksController::class,'index'])->name('tasks.index');
-    Route::get('/pages/tasks/create', [TasksController::class,'create'])->name('tasks.create');
-    Route::post('/pages/tasks', [TasksController::class, 'store'])->name('tasks.store');
+    Route::get('/pages/tasks', [TasksController::class,'index'])->name('pages.tasks.index');
+    Route::get('/pages/tasks/create', [TasksController::class,'create'])->name('pages.tasks.create');
+    Route::post('/pages/tasks', [TasksController::class, 'store'])->name('pages.tasks.store');
     Route::get('/pages/tasks/{id}', [TasksController::class, 'getClientData'])->name('pages.tasks.getData');
+    Route::get('/get-contragent-data/{id}', [TasksController::class, 'getContragentData'])->name('pages.tasks.getContragentData');
 });
 Auth::routes();
 

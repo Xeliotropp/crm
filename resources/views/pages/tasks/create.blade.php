@@ -11,7 +11,7 @@
                     <h3>Създаване на задача</h3>
                 </div>
                 <div class="card-body">
-                    <form id="taskForm" action="{{ url('pages/tasks') }}" method="POST" enctype="multipart/form-data">
+                    <form id="taskForm" action="{{ route('pages.tasks.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="d-flex">
                             <div class="col-md-5 mx-5">
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <select id="contragentId" name="contragent" class="form-control">
+                                        <select id="contragentId" name="contragent" class="form-control" onchange="fetchContragentData()">
                                             <option value="">Избери контрагент</option>
                                             @foreach ($contragents as $contragent)
                                                 <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
@@ -167,7 +167,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="price_without_vat" class="fw-bold">Сума без ДДС*</label>
-                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control">
+                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control" onchange="fetchContragentData()">
                                         <small id="price_without_vatError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -178,7 +178,7 @@
                                     <div class="d-flex gap-5">
                                         <div class="mb-3 pe-5">
                                             <label for="contragent_sum" class="fw-bold">Сума на контрагент*</label>
-                                            <input id="contragent_sum" name="contragent_sum" type="number" class="form-control">
+                                            <input id="contragent_sum" name="contragent_sum" type="text" class="form-control" readonly>
                                             <small id="contragent_sumError" class="text-danger"></small>
                                         </div>
                                         <div class="ms-5 ps-5">
@@ -215,10 +215,29 @@ function fetchClientData() {
             document.getElementById('object2').value = data.object_second || '';
             document.getElementById('object3').value = data.object_third || '';
             document.getElementById('object4').value = data.object_fourth || '';
-            document.getElementById('contragentId').value = data.contragent_id || '';
             // Add more fields as needed
         })
         .catch(error => console.error('Error:', error));
+}
+
+function fetchContragentData() {
+    const contragentId = document.getElementById('contragentId').value;
+    if (!contragentId) return;
+
+    fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragentId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('contragent_sum').value = data.commission_percentage;
+            calculateSum(data.commission_percentage)    
+            })
+        .catch(error => console.error('Error:', error));
+        function calculateContragentSum(commissionPercentage) {
+    const priceWithoutVat = document.getElementById('price_without_vat').value;
+    if (priceWithoutVat) {
+        const contragentSum = priceWithoutVat * (commissionPercentage / 100);
+        document.getElementById('contragent_sum').value = contragentSum.toFixed(2);
+    }
+}
 }
 </script>
 @endpush
