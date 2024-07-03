@@ -2,7 +2,6 @@
 @section('title', 'Създаване на задача')
 
 @section('content')
-<p class="text-danger fw-bold text-center h1">ВСЕ ОЩЕ НЕ РАБОТИ ИЗЦЯЛО!</p>
 <div class="container-fluid mt-5 pd-5">
     <div class="row">
         <div class="col-md-12">
@@ -11,20 +10,22 @@
                     <h3>Създаване на задача</h3>
                 </div>
                 <div class="card-body">
-                    <form id="taskForm" action="{{ route('pages.tasks.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('pages.tasks.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="d-flex">
                             <div class="col-md-5 mx-5">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <label for="clientId" class="fw-bold">Клиент*</label>
-                                        <select id="clientId" name="clientId" class="form-control" onchange="fetchClientData()">
+                                        <label for="client" class="fw-bold">Клиент*</label>
+                                        <select id="client" name="client" class="form-control" onchange="fetchClientData()">
                                             <option value="">Избери клиент</option>
                                             @foreach ($clients as $client)
                                                 <option value="{{ $client->id }}">{{ $client->client }}</option>
                                             @endforeach
                                         </select>
-                                        <small id="clientIdError" class="text-danger"></small>
+                                        @error('client')
+                                            <small id="clientError" class="text-danger"></small>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="client_address_1" class="fw-bold">Адрес на обекта*</label>
@@ -50,8 +51,10 @@
                                 <div class="d-flex gap-5">
                                     <div class="mb-3 pe-5">
                                         <label for="certificateDate" class="fw-bold">Дата на измерване*</label>
-                                        <input id="certificateDate" name="certificateDate" type="date" class="form-control">
-                                        <small id="certificateDateError" class="text-danger"></small>
+                                        <input id="dateOfMeasurement" name="dateOfMeasurement" type="date" class="form-control">
+                                        @error('certificiteDate')
+                                            <small id="certificateDateError" class="text-danger"></small>
+                                        @enderror
                                     </div>
                                     <div class="ms-5 ps-5">
                                         <label>Параметри на измерването</label><br>
@@ -101,8 +104,8 @@
                                 <p class="fw-bold text-center">Следващо измерване</p>
                                 <div class="h-25 d-flex gap-5">
                                     <div class="mb-3 pe-5">
-                                        <label for="nextMeasurementDate" class="fw-bold">Дата на следващо измерване*</label>
-                                        <input id="nextMeasurementDate" name="nextMeasurementDate" type="date" class="form-control">
+                                        <label for="nextMeasurement" class="fw-bold">Дата на следващо измерване*</label>
+                                        <input id="nextMeasurementDate" name="nextMeasurement" type="date" class="form-control">
                                         <small id="nextMeasurementDateError" class="text-danger"></small>
                                     </div>
                                     <div class="ms-5 ps-5">
@@ -186,6 +189,15 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="col-md-12 mb-3">
                             <button type="submit" class="btn btn-success float-end">Добави</button>
                         </div>
@@ -200,10 +212,10 @@
 @push('scripts')
 <script>
 function fetchClientData() {
-    const clientId = document.getElementById('clientId').value;
-    if (!clientId) return;
+    const client = document.getElementById('client').value;
+    if (!client) return;
 
-    fetch(`{{ route('pages.tasks.getData', '') }}/${clientId}`)
+    fetch(`{{ route('pages.tasks.getData', '') }}/${client}`)
         .then(response => response.json())
         .then(data => {
             // Populate form fields with the returned data

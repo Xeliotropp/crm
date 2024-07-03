@@ -20,56 +20,9 @@ class TasksController extends Controller
     }
     public function store(TasksFormRequest $request){
         $validatedData = $request->validated();
-
-        $task = new Tasks();
-
-        $task->client = $validatedData["client"];
-        $task->client_address_1 = $validatedData["client_address_1"];
-        $task->client_address_2 = $validatedData["client_address_2"];
-        $task->client_address_3 = $validatedData["client_address_3"];
-        $task->client_address_4 = $validatedData["client_address_4"];
-
-        $task->contragent = $validatedData["contragent"];
-        $task->dateOfMeasurment = $validatedData["dateOfMeasurment"];
-
-        $task->mk = $validatedData["mk"];
-        $task->osv = $validatedData["osv"];
-        $task->sh = $validatedData["sh"];
-        $task->vent = $validatedData["vent"];
-        $task->klim = $validatedData["klim"];
-        $task->f0 = $validatedData["f0"];
-        $task->z = $validatedData["z"];
-        $task->m = $validatedData["m"];
-        $task->izol = $validatedData["izol"];
-        $task->dtz = $validatedData["dtz"];
-
-        $task->wayOfShowingDocumentation = $validatedData["wayOfShowingDocumentation"];
-        $task->certificateNumber = $validatedData["certificateNumber"];
-        $task->certificateDate = $validatedData["certificateDate"];
-
-        $task->nextMeasurment = $validatedData["nextMeasurment"];
-        $task->mkNext = $validatedData["mkNext"];
-        $task->osvNext = $validatedData["osvNext"];
-        $task->ventNext = $validatedData["ventNext"];
-        $task->klimNext = $validatedData["klimNext"];
-        $task->f0Next = $validatedData["f0Next"];
-        $task->zNext = $validatedData["zNext"];
-        $task->mNext = $validatedData["mNext"];
-        $task->izolNext = $validatedData["izolNext"];
-        $task->dtzNext = $validatedData["dtzNext"];
-        $task->dtNext = $validatedData["dtNext"];
-
-        $task->invoice = $validatedData["invoice"];
-        $task->payment_method = $validatedData["payment_method"];
-        $task->invoice_date = $validatedData["invoice_date"];
-        $task->price_without_vat = $validatedData["price_without_vat"];
-        $task->paid = $validatedData["paid"];
-        $task->contragent_sum = $validatedData["contragent_sum"];
-        $task->total_sum = $validatedData["total_sum"];
-
-        $task->save();
-
-        return redirect('/pages/tasks')->with('success','Успешно създадена задача!');
+        $task = Tasks::create($validatedData);
+        
+        return redirect()->route('pages.tasks.index')->with('success', 'Task created successfully');
     }
 
     public function getClientData($id)
@@ -85,11 +38,11 @@ class TasksController extends Controller
     }
 
     public function getContragentData($id)
-{
-    $contragent = Contragents::findOrFail($id);
-    return response()->json([
-        'commission_percentage' => $contragent->commission_percentage,
-        // You can include other fields here if needed
-    ]);
-}
+    {
+        $contragent = Contragents::findOrFail($id);
+        return response()->json([
+            'commission_percentage' => $contragent->commission_percentage,
+            // You can include other fields here if needed
+        ]);
+    }
 }

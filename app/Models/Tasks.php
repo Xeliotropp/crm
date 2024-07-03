@@ -10,12 +10,6 @@ class Tasks extends Model
     use HasFactory;
 
     protected $fillable = [
-        "client",
-        "client_address_1",
-        "client_address_2",
-        "client_address_3",
-        "client_address_4",
-        "contragent",
         "dateOfMeasurement",
         "mk",
         "osv",
@@ -28,9 +22,9 @@ class Tasks extends Model
         "izol",
         "dtz",
         "wayOfShowingDocumentation",
-        "certifacateNumber",
-        "certifacteDate",
-        "nextMeasurment",
+        "certificateNumber",
+        "certificateDate",
+        "nextMeasurement",
         "mkNext",
         "osvNext",
         "shNext",
@@ -47,6 +41,12 @@ class Tasks extends Model
         "price_without_vat",
         "paid",
         "contragent_sum",
-        "total_sum"
+        "total_sum",
+        "client",
+        "client_address_1",
+        "client_address_2",
+        "client_address_3",
+        "client_address_4",
+        "contragent",
     ];
 }
