@@ -46,16 +46,6 @@
                                         <input type="text" class="form-control" id="object4" name="client_address_4" readonly>
                                         <small id="object4Error" class="text-danger"></small>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <select id="contragentId" name="contragent" class="form-control" onchange="fetchContragentData()">
-                                            <option value="">Избери контрагент</option>
-                                            @foreach ($contragents as $contragent)
-                                                <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <small id="contragentIdError" class="text-danger"></small>
-                                    </div>
                                 </div>
                                 <div class="d-flex gap-5">
                                     <div class="mb-3 pe-5">
@@ -93,13 +83,13 @@
                                     <input type="text" id="wayOfShowingDocumentation" name="wayOfShowingDocumentation" class="form-control" rows="3">
                                     <small id="wayOfShowingDocumentationError" class="text-danger"></small>
                                 </div>
-                                <div class="d-flex gap-5">
+                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="certificateNumber" class="fw-bold">Номер на сертификат*</label>
                                         <input id="certificateNumber" name="certificateNumber" type="text" class="form-control">
                                         <small id="certificateNumberError" class="text-danger"></small>
                                     </div>
-                                    <div class="col-md-5 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label for="certificateDate" class="fw-bold">Дата на сертификат*</label>
                                         <input id="certificateDate" name="certificateDate" type="date" class="form-control">
                                         <small id="certificateDateError" class="text-danger"></small>
@@ -158,30 +148,36 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="payment_method" class="fw-bold">Начин на плащане*</label>
-                                        <select id="payment_method" name="payment_method" class="form-control">
-                                            <option value="">Избери начин на плащане</option>
-                                            <option value="cash">В брой</option>
-                                            <option value="card">С карта</option>
-                                        </select>
+                                        <input id="payment_method" name="payment_method" type="text" class="form-control" placeholder="В брой или С карта" >
                                         <small id="payment_methodError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="price_without_vat" class="fw-bold">Сума без ДДС*</label>
-                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control" onchange="fetchContragentData()">
+                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control">
                                         <small id="price_without_vatError" class="text-danger"></small>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="contragentId" class="fw-bold">Контрагент*</label>
+                                        <select id="contragentId" name="contragent" class="form-control" onchange="fetchContragentData()">
+                                            <option value="">Избери контрагент</option>
+                                            @foreach ($contragents as $contragent)
+                                                <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small id="contragentIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="paid" class="fw-bold">Платено*</label>
                                         <input type="checkbox" id="paid" name="paid">
                                         <small id="paidError" class="text-danger"></small>
                                     </div>
-                                    <div class="d-flex gap-5">
-                                        <div class="mb-3 pe-5">
+                                    <div class="row">
+                                        <div class="col-md-6">
                                             <label for="contragent_sum" class="fw-bold">Сума на контрагент*</label>
                                             <input id="contragent_sum" name="contragent_sum" type="text" class="form-control" readonly>
                                             <small id="contragent_sumError" class="text-danger"></small>
                                         </div>
-                                        <div class="ms-5 ps-5">
+                                        <div class="col-md-6">
                                             <label for="total_sum" class="fw-bold">Реално постъпила сума без ДДС*</label>
                                             <input id="total_sum" name="total_sum" type="text" class="form-control">
                                             <small id="total_sumError" class="text-danger"></small>
@@ -217,27 +213,26 @@ function fetchClientData() {
             document.getElementById('object4').value = data.object_fourth || '';
             // Add more fields as needed
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Грешка:', error));
 }
-
 function fetchContragentData() {
     const contragentId = document.getElementById('contragentId').value;
+    const priceNoVAT = document.getElementById('price_without_vat').value;
     if (!contragentId) return;
 
     fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragentId}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('contragent_sum').value = data.commission_percentage;
-            calculateSum(data.commission_percentage)    
-            })
+            document.getElementById('contragent_sum').value = data.commission_percentage; 
+            if(data.commission_percentage === null || data.commission_percentage === 0){
+                 document.getElementById('total_sum').value = priceNoVAT;
+            }
+            else{
+                document.getElementById('total_sum').value = priceNoVAT-(priceNoVAT * (data.commission_percentage/100));
+
+            }
+        })
         .catch(error => console.error('Error:', error));
-        function calculateContragentSum(commissionPercentage) {
-    const priceWithoutVat = document.getElementById('price_without_vat').value;
-    if (priceWithoutVat) {
-        const contragentSum = priceWithoutVat * (commissionPercentage / 100);
-        document.getElementById('contragent_sum').value = contragentSum.toFixed(2);
-    }
-}
 }
 </script>
 @endpush
