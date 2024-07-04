@@ -28,7 +28,6 @@
                             <thead>
                                 <tr>
                                     <th>№</th>
-                                    <th>Задача</th>
                                     <th>Клиент</th>
                                     <th>Адрес на обекта</th>
                                     <th>Дата на измерване</th>
@@ -37,11 +36,11 @@
                                     <th>Дата на сертификат</th>
                                     <th>Дата на следващо измерване</th>
                                     <th>Номер на фактура</th>
+                                    <th>Платено</th>
                                     <th>Дата на фактура</th>
                                     <th>Начин на плащане</th>
                                     <th>Сума без ДДС</th>
                                     <th>Платено</th>
-                                    <th>Сума на контрагент</th>
                                     <th>Реално постъпила сума без ДДС</th>
                                     <th>Действие</th>
                                 </tr>
@@ -50,18 +49,19 @@
                                 @foreach ($tasks as $task)
                                     <tr>
                                         <td>{{ $task->id }}</td>
-                                        <td>Клиент</td>
-                                        <td>Адрес на обекта</td>
+                                        <td id="client">{{$task->client}}</td>
+                                        <td>{{$task->client_address_1}}</td>
                                         <td>{{ $task->dateOfMeasurement }}</td>
                                         <td>{{ $task->wayOfShowingDocumentation }}</td>
-                                        <td>{{ $task->certifacateNumber }}</td>
-                                        <td>{{ $task->certifacteDate }}</td>
-                                        <td>{{ $task->nextMeasurment }}</td>
+                                        <td>{{ $task->certificateNumber }}</td>
+                                        <td>{{ $task->certificateDate }}</td>
+                                        <td>{{ $task->nextMeasurement }}</td>  
                                         <td>{{ $task->invoice }}</td>
+                                        <td>{{ $task->paid == '0' ? 'Не' : 'Да' }}</td>
                                         <td>{{ $task->invoice_date }}</td>  
                                         <td>{{ $task->payment_method}}</td>  
                                         <td>{{ $task->price_without_vat }}</td>  
-                                        <td>{{ $task->paid }}</td>  
+
                                         <td>Сума на контрагент</td>
                                         <td>{{ $task->total_sum }}</td>  
                                         <td>
