@@ -6,13 +6,13 @@
                     <h5 class="modal-title" id="exampleModalLabel">Изтриване на клиент</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="destroytask">
+                <form wire:submit.prevent="destroyTask">
                     <div class="modal-body">
                         <h6>Сигурни ли сте, че искате да изтриете записа?</h6>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Да, изтрий!</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Да, изтрий!</button>
                     </div>
                 </form>
             </div>
@@ -29,7 +29,7 @@
                                 <tr>
                                     <th>№</th>
                                     <th>Клиент</th>
-                                    <th>Адрес на обекта</th>
+                                    <th>Обект</th>
                                     <th>Дата на измерване</th>
                                     <th>Начин на предоставяне на документация</th>
                                     <th>Номер на сертификат</th>
@@ -65,14 +65,16 @@
                                         <td>Сума на контрагент</td>
                                         <td>{{ $task->total_sum }}</td>  
                                         <td>
-                                            <a href="{{ url('pages/tasks/' . $task->id . '/edit') }}"
-                                                class="btn btn-success btn-sm">
-                                                Редактиране
-                                            </a>
-                                            <a wire:click="deletetask({{ $task->id }})" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                class="btn btn-danger btn-sm">
-                                                Изтриване
-                                            </a>
+                                            <div class="d-flex w-auto">
+                                                <a href="{{ url('pages/tasks/' . $task->id . '/edit') }}"
+                                                    class="btn btn-success btn-sm">
+                                                    Редактиране
+                                                </a>
+                                                <a wire:click="deleteTask({{ $task->id }})" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                    class="btn btn-danger btn-sm">
+                                                    Изтриване
+                                                </a>    
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -92,8 +94,28 @@
 </div>
 @push('script')
 <script>
+ window.addEventListener('load', function() {
+    let clientCells = document.querySelectorAll('td[id="client"]');
+    
+    clientCells.forEach(cell => {
+        const clientId = cell.textContent.trim();
+        fetchClientName(clientId, cell);
+    });
+});
+
+function fetchClientName(clientId, cell) {
+    fetch(`/get-client-name/${clientId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.client) {
+                cell.textContent = data.client;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
     window.addEventListener('close-modal', event => {
         $('#deleteModal').modal('hide');
     });
+
 </script>
 @endpush

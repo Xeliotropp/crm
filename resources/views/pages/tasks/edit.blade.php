@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Създаване на задача')
+@section('title', 'Редактиране на задача')
 
 @section('content')
 <div class="container-fluid mt-5 pd-5">
@@ -7,22 +7,18 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Създаване на задача</h3>
+                    <h3>Редактиране на задача</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('pages.tasks.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('pages/tasks/' . $task->id) }} method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="d-flex">
                             <div class="col-md-5 mx-5">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="client" class="fw-bold">Клиент*</label>
-                                        <select id="client" name="client" class="form-control" onchange="fetchClientData()">
-                                            <option value="">Избери клиент</option>
-                                            @foreach ($clients as $client)
-                                                <option value="{{ $client->id }}" id="clientName">{{ $client->client }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input id="client" name="client" class="form-control" value="{{old('client', $task->client)}}">
                                         @error('client')
                                             <small id="clientError" class="text-danger"></small>
                                         @enderror
@@ -51,7 +47,7 @@
                                 <div class="d-flex gap-5">
                                     <div class="mb-3 pe-5">
                                         <label for="certificateDate" class="fw-bold">Дата на измерване*</label>
-                                        <input id="dateOfMeasurement" name="dateOfMeasurement" type="date" class="form-control">
+                                        <input id="dateOfMeasurement" name="dateOfMeasurement" type="date" class="form-control" value="{{$task->dateOfMeasurement}}">
                                         @error('certificiteDate')
                                             <small id="certificateDateError" class="text-danger"></small>
                                         @enderror
@@ -141,7 +137,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="invoice" class="fw-bold">Номер на фактура*</label>
-                                        <input type="text" id="invoice" name="invoice" class="form-control">
+                                        <input type="text" id="invoice" name="invoice" class="form-control" value="{{$task->invoice}}">
                                         <small id="invoiceError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -151,7 +147,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="payment_method" class="fw-bold">Начин на плащане*</label>
-                                        <input id="payment_method" name="payment_method" type="text" class="form-control" placeholder="В брой или С карта" >
+                                        <input id="payment_method" name="payment_method" type="text" class="form-control" placeholder="В брой или С карта" value="{{$task->payment_method}}">
                                         <small id="payment_methodError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -164,7 +160,8 @@
                                         <select id="contragentId" name="contragent" class="form-control" onchange="fetchContragentData()">
                                             <option value="">Избери контрагент</option>
                                             @foreach ($contragents as $contragent)
-                                                <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
+                                                
+                                            
                                             @endforeach
                                         </select>
                                         <small id="contragentIdError" class="text-danger"></small>
@@ -182,7 +179,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="total_sum" class="fw-bold">Реално постъпила сума без ДДС*</label>
-                                            <input id="total_sum" name="total_sum" type="text" class="form-control">
+                                            <input id="total_sum" name="total_sum" type="text" class="form-control" value="{{$task->total_sum}}">
                                             <small id="total_sumError" class="text-danger"></small>
                                         </div>
                                     </div>
@@ -199,7 +196,7 @@
                             </div>
                         @endif
                         <div class="col-md-12 mb-3">
-                            <button type="submit" class="btn btn-success float-end">Добави</button>
+                            <button type="submit" class="btn btn-success float-end">Публикувай</button>
                         </div>
                     </form>
                 </div>
@@ -218,11 +215,12 @@ function fetchClientData() {
     fetch(`{{ route('pages.tasks.getData', '') }}/${client}`)
         .then(response => response.json())
         .then(data => {
+            // Populate form fields with the returned data
             document.getElementById('object1').value = data.object_first || '';
             document.getElementById('object2').value = data.object_second || '';
             document.getElementById('object3').value = data.object_third || '';
             document.getElementById('object4').value = data.object_fourth || '';
-            document.getElementById('clientName').value = data.client_name || '';
+            // Add more fields as needed
         })
         .catch(error => console.error('Грешка:', error));
 }
