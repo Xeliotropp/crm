@@ -10,7 +10,7 @@ class Contragents extends Model
     use HasFactory;
 
     protected $fillable = [
-        'contragent',
+        'contragent_name',
         'company_identifier',
         'vat_number',
         'contact_person',

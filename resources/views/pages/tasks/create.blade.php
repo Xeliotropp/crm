@@ -160,14 +160,14 @@
                                         <small id="price_without_vatError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <select id="contragentId" name="contragent" class="form-control" onchange="fetchContragentData()">
+                                        <label for="contragent" class="fw-bold">Контрагент*</label>
+                                        <select id="contragent" name="contragent" class="form-control" onchange="fetchContragentData()">
                                             <option value="">Избери контрагент</option>
                                             @foreach ($contragents as $contragent)
-                                                <option value="{{ $contragent->id }}">{{ $contragent->contragent_name }}</option>
+                                                <option value="{{ $contragent->id }}" id="contragentName">{{ $contragent->contragent_name }}</option>
                                             @endforeach
                                         </select>
-                                        <small id="contragentIdError" class="text-danger"></small>
+                                        <small id="contragentError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="paid" class="fw-bold">Платено*</label>
@@ -227,13 +227,14 @@ function fetchClientData() {
         .catch(error => console.error('Грешка:', error));
 }
 function fetchContragentData() {
-    const contragentId = document.getElementById('contragentId').value;
+    const contragent = document.getElementById('contragent').value; 
+    if (!contragent) return;
     const priceNoVAT = document.getElementById('price_without_vat').value;
-    if (!contragentId) return;
 
-    fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragentId}`)
+    fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragent}`)
         .then(response => response.json())
         .then(data => {
+            document.getElementById('contragentName').value = data.contragent_name;
             document.getElementById('contragent_sum').value = data.commission_percentage; 
             if(data.commission_percentage === null || data.commission_percentage === 0){
                  document.getElementById('total_sum').value = priceNoVAT;

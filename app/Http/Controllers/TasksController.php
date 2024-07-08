@@ -83,6 +83,7 @@ class TasksController extends Controller
         $contragent = Contragents::findOrFail($id);
         return response()->json([
             'commission_percentage' => $contragent->commission_percentage,
+            'contragent_name' => $contragent->contragent_name,
         ]);
     }
 
@@ -133,7 +134,8 @@ class TasksController extends Controller
         return redirect(route('pages.tasks.index'))->with('success', 'Успешно редактиране на задача');
     }
 
-    public function edit(Tasks $task, Clients $client, Contragents $contragents){
-        return view('pages.tasks.edit', compact('task','client', 'contragents'));
+    public function edit($id){
+        $task = Tasks::find($id);
+        return view('pages.tasks.edit', ['task'=>$task]);
     }
 }
