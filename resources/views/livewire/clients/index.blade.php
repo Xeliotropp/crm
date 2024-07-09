@@ -47,7 +47,7 @@
                             <tbody>
                                 @foreach ($clients as $client)
                                     <tr>
-                                        <td>{{ $client->id }}</td>
+                                        <td><a href="{{url('/crm/pages/clients/view/'.$client->id)}}">{{ $client->id }}</a></td>
                                         <td>{{ $client->client }}</td>
                                         <td>{{ $client->company_identifier }}</td>
                                         <td>{{ $client->contact_person }}</td>
@@ -64,7 +64,7 @@
                                         <td>{{ $client->adress_object_4 }}</td>  
 
                                         <td>
-                                            <a href="{{ url('pages/clients/' . $client->id . '/edit') }}"
+                                            <a href="{{ url('crm/pages/clients/' . $client->id . '/edit') }}"
                                                 class="btn btn-success btn-sm">
                                                 Редактиране
                                             </a>

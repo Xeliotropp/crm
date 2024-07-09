@@ -42,7 +42,7 @@ class ClientsController extends Controller
 
         $client->save();
 
-        return redirect('/pages/clients')->with('success', 'Успешно добавяне на нов клиент!');
+        return redirect('/crm/pages/clients')->with('success', 'Успешно добавяне на нов клиент!');
     }
 
     public function edit(Clients $client)
@@ -72,8 +72,11 @@ class ClientsController extends Controller
 
         $client->save();
 
-        return redirect('/pages/clients')->with('success', 'Успешно редактиране на клиент');
+        return redirect('/crm/pages/clients')->with('success', 'Успешно редактиране на клиент');
     }
 
-
+    public function view($id){
+        $client = Clients::find($id);
+        return view('pages.clients.view', compact('client'));
+    }
 }

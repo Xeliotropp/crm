@@ -204,7 +204,18 @@ return [
         'vat_number' => 'ЗДДС №',
         'email' => 'имейл',
         'password' => 'парола',
-        'wayOfShowingDocumentation' => 'начин на предоставяне на документация'
+        'wayOfShowingDocumentation' => 'начин на предоставяне на документация',
+        'dateOfMeasurement ' => 'дата на измерване',
+        'certificateNumber' => 'номер на сертификат',
+        'certificateDate' => 'дата на сертификат',
+        'invoice' => 'номер на фактура',
+        'invoice_date' => 'дата на фактура',
+        'payment_method' => 'начин на плащане',
+        'contragent_sum' => 'сума на контрагент',
+        'total_sum' => 'реално постъпила сума без ддс',
+        'client_address_1' => 'обект на клиента',
+        'contragent' => 'контрагент',
+        'price_without_vat' => 'сума без ддс',
     ],
 
 ];

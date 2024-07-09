@@ -9,11 +9,11 @@
                     <div class="card-header">
                         <h3>
                             Редактиране на клиент
-                            <a href="{{ url('pages/clients') }}" class="btn btn-primary btn-sm text-white float-end">Назад</a>
+                            <a href="{{ url('crm/pages/clients') }}" class="btn btn-primary btn-sm text-white float-end">Назад</a>
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form action="/pages/clients/{{$client->id}}" method="POST" enctype="multipart/form-data">
+                        <form action="/crm/pages/clients/{{$client->id}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="row">

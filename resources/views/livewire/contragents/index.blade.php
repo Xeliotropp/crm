@@ -39,7 +39,7 @@
                             <tbody>
                                 @foreach ($contragents as $contragent)
                                     <tr>
-                                        <td>{{ $contragent->id }}</td>
+                                        <td><a href="{{url('/crm/pages/contragents/view/'.$contragent->id)}}">{{ $contragent->id }}</a></td>
                                         <td>{{ $contragent->contragent_name }}</td>
                                         <td>{{ $contragent->contragent_company_identifier }}</td>
                                         <td>{{ $contragent->contragent_contact_person }}</td>
@@ -47,7 +47,7 @@
                                         <td>{{ $contragent->contragent_additional_information }}</td>
                                         <td>{{ $contragent->commission_percentage }}</td>
                                         <td>
-                                            <a href="{{ url('pages/contragents/' . $contragent->id . '/edit') }}"
+                                            <a href="{{ url('crm/pages/contragents/' . $contragent->id . '/edit') }}"
                                                 class="btn btn-success btn-sm">
                                                 Редактиране
                                             </a>
@@ -64,7 +64,7 @@
                             {{ $contragents->links() }}
                         </div>
                         <div>
-                            <a class="btn btn-primary float-end" id="add" href="/pages/contragents/create">Добави нов</a>
+                            <a class="btn btn-primary float-end" id="add" href="/crm/pages/contragents/create">Добави нов</a>
                         </div>
                     </div>
                 </div>

@@ -4,18 +4,18 @@
         <div>
             <nav>
                 <ul class="">
-                    <a class="text-white mr-4" href="/" style="text-decoration:none"><i
+                    <a class="text-white mr-4" href="/crm" style="text-decoration:none"><i
                             class="bi bi-house"></i>&nbsp;Начало</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/pages/clients" style="text-decoration:none"><i
+                    <a class = "text-white" href="/crm/pages/clients" style="text-decoration:none"><i
                             class="bi bi-people"></i>&nbsp;Клиенти</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/pages/contragents" style="text-decoration:none"><i
+                    <a class = "text-white" href="/crm/pages/contragents" style="text-decoration:none"><i
                             class="bi bi-person"></i>&nbsp;Контрагенти</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/pages/tasks/create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
+                    <a class = "text-white" href="/crm/pages/tasks/create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
+                    <a class = "text-white" href="/crm/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @auth
                         <div class="float-end ml-4">

@@ -35,7 +35,7 @@ class ContragentsController extends Controller
     
         $contragent->save();
 
-        return redirect('/pages/contragents')->with('success', 'Успешно добавяне на нов контрагент!');
+        return redirect('/crm/pages/contragents')->with('success', 'Успешно добавяне на нов контрагент!');
     }
 
     public function edit(Contragents $contragent){
@@ -55,6 +55,11 @@ class ContragentsController extends Controller
 
         $contragent->save();
 
-        return redirect('/pages/contragents')->with('success', 'Успешно редактиране на контрагент');
+        return redirect('/crm/pages/contragents')->with('success', 'Успешно редактиране на контрагент');
+    }
+
+    public function view($id){
+        $contragent = Contragents::find($id);
+        return view('pages.contragents.view', ['contragent'=> $contragent]);
     }
 }

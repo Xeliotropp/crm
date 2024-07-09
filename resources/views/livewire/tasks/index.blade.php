@@ -40,7 +40,7 @@
                                     <th>Дата на фактура</th>
                                     <th>Начин на плащане</th>
                                     <th>Сума без ДДС</th>
-                                    <th>Платено</th>
+                                    <th>Сума на контрагент</th>
                                     <th>Реално постъпила сума без ДДС</th>
                                     <th>Действие</th>
                                 </tr>
@@ -48,7 +48,7 @@
                             <tbody>
                                 @foreach ($tasks as $task)
                                     <tr>
-                                        <td>{{ $task->id }}</td>
+                                        <td><a href="{{url('/crm/pages/tasks/view/'.$task->id)}}">{{ $task->id }} </a></td>
                                         <td id="client">{{$task->client}}</td>
                                         <td>{{$task->client_address_1}}</td>
                                         <td>{{ $task->dateOfMeasurement }}</td>
@@ -62,11 +62,11 @@
                                         <td>{{ $task->payment_method}}</td>  
                                         <td>{{ $task->price_without_vat }}</td>  
 
-                                        <td>Сума на контрагент</td>
+                                        <td>{{ $task->contragent_sum }}</td>
                                         <td>{{ $task->total_sum }}</td>  
                                         <td>
                                             <div class="d-flex w-auto">
-                                                <a href="{{ url('pages/tasks/' . $task->id . '/edit') }}"
+                                                <a href="{{ url('crm/pages/tasks/' . $task->id . '/edit') }}"
                                                     class="btn btn-success btn-sm">
                                                     Редактиране
                                                 </a>
@@ -84,7 +84,7 @@
                             {{ $tasks->links() }}
                         </div>
                         <div>
-                            <a href="/pages/tasks/create" class="btn btn-primary float-end">Добави нов</a>
+                            <a href="/crm/pages/tasks/create" class="btn btn-primary float-end">Добави нов</a>
                         </div>
                     </div>
                 </div>
@@ -92,30 +92,3 @@
         </div>
     </div>
 </div>
-@push('script')
-<script>
- window.addEventListener('load', function() {
-    let clientCells = document.querySelectorAll('td[id="client"]');
-    
-    clientCells.forEach(cell => {
-        const clientId = cell.textContent.trim();
-        fetchClientName(clientId, cell);
-    });
-});
-
-function fetchClientName(clientId, cell) {
-    fetch(`/get-client-name/${clientId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.client) {
-                cell.textContent = data.client;
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}
-    window.addEventListener('close-modal', event => {
-        $('#deleteModal').modal('hide');
-    });
-
-</script>
-@endpush

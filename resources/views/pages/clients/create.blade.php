@@ -9,12 +9,12 @@
                     <div class="card-header">
                         <h3>
                             Добавяне на клиент
-                            <a href="{{ url('pages/clients/') }}"
+                            <a href="{{ url('crm/pages/clients/') }}"
                                 class="btn btn-primary btn-sm text-white float-end">Назад</a>
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('pages/clients') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('crm/pages/clients') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
