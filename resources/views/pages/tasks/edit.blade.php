@@ -18,7 +18,13 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="client" class="fw-bold">Клиент*</label>
-                                        <input id="client" name="client" class="form-control" value="{{old('client', $task->client)}}">
+                                        <select name="client" id="client" class="form-control" onchange="fetchClientData()">
+                                            @foreach ($clients as $client)
+                                            <option value="{{$client->id}}" id="clientName">{{$client->client}}</option>
+                                            @endforeach
+                                            <option>Избери клиент</option>
+                                        </select>
+                                        {{-- <input id="client" name="client" class="form-control" value="{{old('client', $task->client)}}"> --}}
                                         @error('client')
                                             <small id="clientError" class="text-danger"></small>
                                         @enderror
@@ -156,7 +162,13 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <input type="text" class="form-control" id="contragent" name="contragent" value="{{$task->contragent}}">
+                                        <select name="contragent" id="contragent" class="form-control" onchange="fetchContragentData()">
+                                            @foreach ($contragents as $contragent)
+                                            <option value="{{$contragent->id}}" id="contragentName">{{$contragent->contragent_name}}</option>
+                                            @endforeach
+                                            <option >Избери контрагент</option>
+                                        </select>
+                                        {{-- <input type="text" class="form-control" id="contragent" name="contragent" value="{{$task->contragent}}"> --}}
                                         <small id="contragentIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -208,23 +220,23 @@ function fetchClientData() {
     fetch(`{{ route('pages.tasks.getData', '') }}/${client}`)
         .then(response => response.json())
         .then(data => {
-            // Populate form fields with the returned data
             document.getElementById('object1').value = data.object_first || '';
             document.getElementById('object2').value = data.object_second || '';
             document.getElementById('object3').value = data.object_third || '';
             document.getElementById('object4').value = data.object_fourth || '';
-            // Add more fields as needed
+            document.getElementById('clientName').value = data.client_name || '';
         })
         .catch(error => console.error('Грешка:', error));
 }
 function fetchContragentData() {
-    const contragentId = document.getElementById('contragentId').value;
+    const contragent = document.getElementById('contragent').value; 
+    if (!contragent) return;
     const priceNoVAT = document.getElementById('price_without_vat').value;
-    if (!contragentId) return;
 
-    fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragentId}`)
+    fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragent}`)
         .then(response => response.json())
         .then(data => {
+            document.getElementById('contragentName').value = data.contragent_name;
             document.getElementById('contragent_sum').value = data.commission_percentage; 
             if(data.commission_percentage === null || data.commission_percentage === 0){
                  document.getElementById('total_sum').value = priceNoVAT;

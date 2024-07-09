@@ -136,7 +136,9 @@ class TasksController extends Controller
 
     public function edit($id){
         $task = Tasks::find($id);
-        return view('pages.tasks.edit', ['task'=>$task]);
+        $clients = Clients::all();
+        $contragents = Contragents::all();
+        return view('pages.tasks.edit', ['task'=>$task, 'clients'=>$clients, 'contragents'=>$contragents]);
     }
 
     public function view($id){
