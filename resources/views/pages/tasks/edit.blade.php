@@ -10,7 +10,7 @@
                     <h3>Редактиране на задача</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('pages/tasks/' . $task->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('crm/pages/tasks/' . $task->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="d-flex">
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <input type="text" class="form-control" id="contragent" value="{{$task->contragent}}">
+                                        <input type="text" class="form-control" id="contragent" name="contragent" value="{{$task->contragent}}">
                                         <small id="contragentIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
