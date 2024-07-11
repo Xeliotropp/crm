@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+<div class="container-fluid mt-5 pd-5">
+    <div class="row container-fluid">
+        <div class="col-11 container-fluid">
                 <div class="card">
                     <div class="card-header">
                         <h3>

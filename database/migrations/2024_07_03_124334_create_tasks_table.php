@@ -49,12 +49,15 @@ return new class extends Migration
             $table->float('contragent_sum');
             $table->float('total_sum');
 
-            $table->string('client');
+            // $table->string('client');
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->string('client_address_1');
             $table->string('client_address_2')->nullable();
             $table->string('client_address_3')->nullable();
             $table->string('client_address_4')->nullable();
-            $table->string('contragent');
+            $table->unsignedBigInteger('contragent_id');
+            $table->foreign('contragent_id')->references('id')->on('contragents')->onDelete('cascade');
             
             $table->timestamps();
                         

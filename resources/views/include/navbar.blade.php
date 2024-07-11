@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<div class="bg-primary d-flex gap-4" style="width: 100%; height:50px">
+@auth
+<div class="bg-primary d-flex gap-4" style="height:50px">
     <header class="container-fluid">
         <div>
             <nav>
@@ -17,7 +18,6 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class = "text-white" href="/crm/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    @auth
                         <div class="float-end ml-4">
                             <div style = "color:white">
                                 <i class="bi bi-person-badge"></i>
@@ -36,16 +36,8 @@
                                 </form>
                             </div>
                         </div>
-                    @endauth
-                    @guest
-                        <div class="float-end ml-4"><a id="modal_trigger" href="{{ route('login') }}"
-                                style="color:white; text-decoration:none; float:right;"><i
-                                    class="bi bi-box-arrow-in-right"></i>
-                                Вход</a></div>
-                    @endguest
-
-                </ul>
-            </nav>
-        </div>
+                    </nav>
+                </div>
     </header>
 </div>
+@endauth  

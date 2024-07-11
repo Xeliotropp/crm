@@ -7,6 +7,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
+                    <a href="{{ url('crm/pages/tasks/') }}"
+                    class="btn btn-primary btn-sm text-white float-end">Назад</a>
                     <h3>Редактиране на задача</h3>
                 </div>
                 <div class="card-body">
@@ -18,36 +20,22 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="client" class="fw-bold">Клиент*</label>
-                                        <select name="client" id="client" class="form-control" onchange="fetchClientData()">
+                                        <select name="client_id" id="client" class="form-control" onchange="fetchClientData()">
                                             @foreach ($clients as $client)
-                                            <option value="{{$client->id}}" id="clientName">{{$client->client}}</option>
+                                            <option value="{{ $client->id }}" {{ $task->client_id == $client->id ? 'selected' : '' }}>
+                                                {{ $client->client }}
+                                            </option>
                                             @endforeach
-                                            <option>Избери клиент</option>
                                         </select>
-                                        {{-- <input id="client" name="client" class="form-control" value="{{old('client', $task->client)}}"> --}}
                                         @error('client')
                                             <small id="clientError" class="text-danger"></small>
                                         @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="client_address_1" class="fw-bold">Адрес на обекта*</label>
-                                        <input type="text" class="form-control" id="object1" name="client_address_1" value="{{old('client_address_1', $task->client_address_1)}}">
-                                        <small id="object1Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_2">Втори адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object2" name="client_address_2" value="{{old('client_address_2', $task->client_address_2)}}">
-                                        <small id="object2Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_3">Трети адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object3" name="client_address_3" value="{{old('client_address_3', $task->client_address_3)}}">
-                                        <small id="object3Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_4">Четвърти адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object4" name="client_address_4" value="{{old('client_address_4', $task->client_address_4)}}">
-                                        <small id="object4Error" class="text-danger"></small>
+                                        <label for="client_address_1" class="fw-bold">Избор на обект*</label>
+                                        <select name="client_address_1" id="client_address_1" class="form-control">
+                                            <option value="{{old('client_address_1', $task->client_address_1)}}">{{old('client_address_1', $task->client_address_1)}}</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="d-flex gap-5">
@@ -157,18 +145,18 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="price_without_vat" class="fw-bold">Сума без ДДС*</label>
-                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control" value="{{$task->price_without_vat}}">
+                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control" onchange="fetchContragentData()" value="{{$task->price_without_vat}}">
                                         <small id="price_without_vatError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <select name="contragent" id="contragent" class="form-control" onchange="fetchContragentData()">
+                                        <select name="contragent_id" id="contragent" class="form-control" onchange="fetchContragentData()">
                                             @foreach ($contragents as $contragent)
-                                            <option value="{{$contragent->id}}" id="contragentName">{{$contragent->contragent_name}}</option>
+                                            <option value="{{ $contragent->id }}" {{ $task->contragent_id == $contragent->id ? 'selected' : '' }}>
+                                                {{ $contragent->contragent_name }}
+                                            </option>
                                             @endforeach
-                                            <option >Избери контрагент</option>
                                         </select>
-                                        {{-- <input type="text" class="form-control" id="contragent" name="contragent" value="{{$task->contragent}}"> --}}
                                         <small id="contragentIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -178,7 +166,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="contragent_sum" class="fw-bold">Сума на контрагент*</label>
+                                            <label for="contragent_sum">% отстъпка за контрагент</label>
                                             <input id="contragent_sum" name="contragent_sum" type="text" class="form-control" value="{{$task->contragent_sum}}">
                                             <small id="contragent_sumError" class="text-danger"></small>
                                         </div>
@@ -213,40 +201,72 @@
 
 @push('scripts')
 <script>
-function fetchClientData() {
-    const client = document.getElementById('client').value;
-    if (!client) return;
+document.addEventListener('DOMContentLoaded', function() {
+    function fetchClientData() {
+        const client = document.getElementById('client').value;
+        if (!client) return;
 
-    fetch(`{{ route('pages.tasks.getData', '') }}/${client}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('object1').value = data.object_first || '';
-            document.getElementById('object2').value = data.object_second || '';
-            document.getElementById('object3').value = data.object_third || '';
-            document.getElementById('object4').value = data.object_fourth || '';
-            document.getElementById('clientName').value = data.client_name || '';
-        })
-        .catch(error => console.error('Грешка:', error));
-}
-function fetchContragentData() {
-    const contragent = document.getElementById('contragent').value; 
-    if (!contragent) return;
-    const priceNoVAT = document.getElementById('price_without_vat').value;
+        fetch(`{{ route('pages.tasks.getData', '') }}/${client}`)
+            .then(response => response.json())
+            .then(data => {
+                const addressSelect = document.getElementById('client_address_1');
+                
+                // Clear existing options
+                addressSelect.innerHTML = '<option value="">Изберете обект</option>';
+                
+                // Add new options based on the client's addresses
+                if (data.object_first) {
+                    addAddressOption(addressSelect, data.object_first, 'object1');
+                }
+                if (data.object_second) {
+                    addAddressOption(addressSelect, data.object_second, 'object2');
+                }
+                if (data.object_third) {
+                    addAddressOption(addressSelect, data.object_third, 'object3');
+                }
+                if (data.object_fourth) {
+                    addAddressOption(addressSelect, data.object_fourth, 'object4');
+                }
+            })
+            .catch(error => console.error('Грешка:', error));
+    }
 
-    fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragent}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('contragentName').value = data.contragent_name;
-            document.getElementById('contragent_sum').value = data.commission_percentage; 
-            if(data.commission_percentage === null || data.commission_percentage === 0){
-                 document.getElementById('total_sum').value = priceNoVAT;
-            }
-            else{
-                document.getElementById('total_sum').value = priceNoVAT-(priceNoVAT * (data.commission_percentage/100));
+    function addAddressOption(selectElement, address, id) {
+        const option = document.createElement('option');
+        option.value = address;
+        option.textContent = address;
+        option.id = id;
+        selectElement.appendChild(option);
+    }
 
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}
+    function fetchContragentData() {
+        const contragent = document.getElementById('contragent').value; 
+        if (!contragent) return;
+        const priceNoVAT = document.getElementById('price_without_vat').value;
+
+        fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragent}`)
+            .then(response => response.json())
+            .then(data => {
+                const contragentSum = document.getElementById('contragent_sum');
+                const totalSum = document.getElementById('total_sum');
+                
+                if (contragentSum) {
+                    contragentSum.value = data.commission_percentage; 
+                }
+
+                if (totalSum) {
+                    if (data.commission_percentage === null || data.commission_percentage === 0) {
+                        totalSum.value = priceNoVAT;
+                    } else {
+                        totalSum.value = priceNoVAT - (priceNoVAT * (data.commission_percentage / 100));
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    
+    window.fetchClientData = fetchClientData;
+    window.fetchContragentData = fetchContragentData;
+});
 </script>
 @endpush

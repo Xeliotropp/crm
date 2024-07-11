@@ -15,7 +15,7 @@ class Index extends Component
     public $taskId;
     public function render()
     {
-        $tasks = Tasks::orderBy("created_at","desc")->paginate(10);
+        $tasks = Tasks::orderBy("id")->paginate(10);
         return view('livewire.tasks.index', compact('tasks'));
     }
 

@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/crm/pages/tasks', [TasksController::class,'index'])->name('pages.tasks.index');
     Route::get('/crm/pages/tasks/create', [TasksController::class,'create'])->name('pages.tasks.create');
     Route::post('/crm/pages/tasks', [TasksController::class, 'store'])->name('pages.tasks.store');
-    Route::get('/crm/pages/tasks/{id}', [TasksController::class, 'getClientData'])->name('pages.tasks.getData');
+    Route::get('/crm/pages/tasks/{name}', [TasksController::class, 'getClientData'])->name('pages.tasks.getData');
     Route::get('/crm/pages/tasks/view/{id}', [TasksController::class, 'view'])->name('pages.tasks.view');
     Route::get('/crm/pages/tasks/{id}/edit', [TasksController::class, 'edit'])->name('pages.tasks.edit');
     Route::put('/crm/pages/tasks/{id}', [TasksController::class,'update'])->name('pages.tasks.update');

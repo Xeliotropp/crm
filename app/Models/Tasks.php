@@ -10,6 +10,8 @@ class Tasks extends Model
     use HasFactory;
 
     protected $fillable = [
+        'client_id',
+        'contragent_id',
         "dateOfMeasurement",
         "mk",
         "osv",
@@ -49,4 +51,10 @@ class Tasks extends Model
         "client_address_4",
         "contragent",
     ];
+    public function client(){
+        return $this->belongsTo(Clients::class, 'client_id', 'id');
+    }
+    public function contragent(){
+        return $this->belongsTo(Contragents::class,'contragent_id', 'id');
+    }
 }

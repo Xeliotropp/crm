@@ -53,12 +53,12 @@ class TasksFormRequest extends FormRequest
             "paid" => 'nullable',
             "contragent_sum" => 'required | numeric',
             "total_sum" => 'required | numeric',
-            'client' => 'required|string',
+            'client_id' => 'required|integer',
             'client_address_1' => 'required|string',
             'client_address_2' => 'nullable|string',
             'client_address_3' => 'nullable|string',
             'client_address_4' => 'nullable|string',
-            'contragent' => 'required|string',
+            'contragent_id' => 'required|integer',
             "price_without_vat" => 'required | numeric',
         ];
 

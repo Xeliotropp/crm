@@ -54,20 +54,20 @@ class TasksController extends Controller
         $task->paid = $request-> paid == true ? '1' : '0';
         $task->contragent_sum = $validatedData['contragent_sum'];
         $task->total_sum = $validatedData['total_sum'];
-        $task->client = $validatedData['client'];
+        $task->client_id = $validatedData['client_id'];
         $task->client_address_1 = $validatedData['client_address_1'];
-        $task->client_address_2 = $validatedData['client_address_2'];
-        $task->client_address_3 = $validatedData['client_address_3'];
-        $task->client_address_4 = $validatedData['client_address_4'];
-        $task->contragent = $validatedData['contragent'];
-
+        //$task->client_address_2 = $validatedData['client_address_2'];
+        //$task->client_address_3 = $validatedData['client_address_3'];
+        //$task->client_address_4 = $validatedData['client_address_4'];
+        $task->contragent_id = $validatedData['contragent_id'];
         $task->save(); 
+
         return redirect(route('pages.tasks.index'))->with('success', 'Успешно създадена задача');
     }
 
-    public function getClientData($id)
+    public function getClientData($name)
     {
-        $client = Clients::findOrFail($id);
+        $client = Clients::findOrFail($name);
         return response()->json([
             'object_first' => $client->object_first,
             'object_second' => $client->object_second,
@@ -123,12 +123,9 @@ class TasksController extends Controller
         $task->paid = $request-> paid == true ? '1' : '0';
         $task->contragent_sum = $validatedData['contragent_sum'];
         $task->total_sum = $validatedData['total_sum'];
-        $task->client = $validatedData['client'];
+        $task->client_id = $validatedData['client_id'];
         $task->client_address_1 = $validatedData['client_address_1'];
-        $task->client_address_2 = $validatedData['client_address_2'];
-        $task->client_address_3 = $validatedData['client_address_3'];
-        $task->client_address_4 = $validatedData['client_address_4'];
-        $task->contragent = $validatedData['contragent'];
+        $task->contragent_id = $validatedData['contragent_id'];
 
         $task->save(); 
         return redirect(route('pages.tasks.index'))->with('success', 'Успешно редактиране на задача');

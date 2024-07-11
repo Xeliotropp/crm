@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="client" class="fw-bold">Клиент*</label>
-                                        <select id="client" name="client" class="form-control" onchange="fetchClientData()">
+                                        <select id="client" name="client_id" class="form-control" onchange="fetchClientData()">
                                             <option value="">Избери клиент</option>
                                             @foreach ($clients as $client)
                                                 <option value="{{ $client->id }}" id="clientName">{{ $client->client }}</option>
@@ -28,24 +28,10 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="client_address_1" class="fw-bold">Адрес на обекта*</label>
-                                        <input type="text" class="form-control" id="object1" name="client_address_1" readonly>
-                                        <small id="object1Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_2">Втори адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object2" name="client_address_2" readonly>
-                                        <small id="object2Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_3">Трети адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object3" name="client_address_3" readonly>
-                                        <small id="object3Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_4">Четвърти адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object4" name="client_address_4" readonly>
-                                        <small id="object4Error" class="text-danger"></small>
+                                        <label for="client_address_1" class="fw-bold">Избор на обект*</label>
+                                        <select name="client_address_1" id="client_address_1" class="form-control">
+                                            <option value="">Изберете обект</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="d-flex gap-5">
@@ -151,17 +137,22 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="payment_method" class="fw-bold">Начин на плащане*</label>
-                                        <input id="payment_method" name="payment_method" type="text" class="form-control" placeholder="В брой или С карта" >
+                                        <select name="payment_method" id="payment_method" class="form-control">
+                                            <option value="" class="form-control">Изберете начин на плащане</option>
+                                            <option value="в брой" class="form-control">в брой</option>
+                                            <option value="по банков път" class="form-control">по банков път</option>
+                                            <option value="с карта" class="form-control">с карта</option>
+                                        </select>
                                         <small id="payment_methodError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="price_without_vat" class="fw-bold">Сума без ДДС*</label>
-                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control">
+                                        <input type="number" id="price_without_vat" name="price_without_vat" class="form-control" onchange="fetchContragentData()">
                                         <small id="price_without_vatError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragent" class="fw-bold">Контрагент*</label>
-                                        <select id="contragent" name="contragent" class="form-control" onchange="fetchContragentData()">
+                                        <select id="contragent" name="contragent_id" class="form-control" onchange="fetchContragentData()">
                                             <option value="">Избери контрагент</option>
                                             @foreach ($contragents as $contragent)
                                                 <option value="{{ $contragent->id }}" id="contragentName">{{ $contragent->contragent_name }}</option>
@@ -176,7 +167,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="contragent_sum" class="fw-bold">Сума на контрагент*</label>
+                                            <label for="contragent_sum">% отстъпка за контрагент</label>
                                             <input id="contragent_sum" name="contragent_sum" type="text" class="form-control" readonly>
                                             <small id="contragent_sumError" class="text-danger"></small>
                                         </div>
@@ -218,13 +209,34 @@ function fetchClientData() {
     fetch(`{{ route('pages.tasks.getData', '') }}/${client}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('object1').value = data.object_first || '';
-            document.getElementById('object2').value = data.object_second || '';
-            document.getElementById('object3').value = data.object_third || '';
-            document.getElementById('object4').value = data.object_fourth || '';
-            document.getElementById('clientName').value = data.client_name || '';
+            const addressSelect = document.getElementById('client_address_1');
+            
+            // Clear existing options
+            addressSelect.innerHTML = '<option value="">Изберете адрес</option>';
+            
+            // Add new options based on the client's addresses
+            if (data.object_first) {
+                addAddressOption(addressSelect, data.object_first, 'object1');
+            }
+            if (data.object_second) {
+                addAddressOption(addressSelect, data.object_second, 'object2');
+            }
+            if (data.object_third) {
+                addAddressOption(addressSelect, data.object_third, 'object3');
+            }
+            if (data.object_fourth) {
+                addAddressOption(addressSelect, data.object_fourth, 'object4');
+            }
         })
         .catch(error => console.error('Грешка:', error));
+}
+
+function addAddressOption(selectElement, address, id) {
+    const option = document.createElement('option');
+    option.value = address;
+    option.textContent = address;
+    option.id = id;
+    selectElement.appendChild(option);
 }
 function fetchContragentData() {
     const contragent = document.getElementById('contragent').value; 
@@ -234,7 +246,6 @@ function fetchContragentData() {
     fetch(`{{ route('pages.tasks.getContragentData', '') }}/${contragent}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('contragentName').value = data.contragent_name;
             document.getElementById('contragent_sum').value = data.commission_percentage; 
             if(data.commission_percentage === null || data.commission_percentage === 0){
                  document.getElementById('total_sum').value = priceNoVAT;

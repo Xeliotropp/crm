@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="container-fluid mt-5 pd-5">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row container-fluid">
+        <div class="col-11 container-fluid">
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('pages.tasks.index')}}" class="btn btn-primary float-end">Назад</a>
@@ -23,24 +23,9 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="client_address_1" class="fw-bold">Адрес на обекта*</label>
+                                        <label for="client_address_1" class="fw-bold">Обект*</label>
                                         <input type="text" class="form-control" id="object1" name="client_address_1" value="{{old('client_address_1', $task->client_address_1)}}" readonly>
                                         <small id="object1Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_2">Втори адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object2" name="client_address_2" value="{{old('client_address_2', $task->client_address_2)}}" readonly>
-                                        <small id="object2Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_3">Трети адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object3" name="client_address_3" value="{{old('client_address_3', $task->client_address_3)}}" readonly>
-                                        <small id="object3Error" class="text-danger"></small>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label for="client_address_4">Четвърти адрес на обекта</label>
-                                        <input type="text" class="form-control" id="object4" name="client_address_4" value="{{old('client_address_4', $task->client_address_4)}}" readonly>
-                                        <small id="object4Error" class="text-danger"></small>
                                     </div>
                                 </div>
                                 <div class="d-flex gap-5">
@@ -155,7 +140,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <input type="text" class="form-control" id="contragent" value="{{$task->contragent}}" readonly>
+                                        <input type="text" class="form-control" id="contragent" value="{{$task->contragent->contragent_name}}" readonly>
                                         <small id="contragentIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">

@@ -18,9 +18,9 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-14 mt-4">
+    <div class="container-fluid mt-5 pd-5">
+        <div class="row container-fluid">
+            <div class="col-11 container-fluid">
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-bordered table-striped">

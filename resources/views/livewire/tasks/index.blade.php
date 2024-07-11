@@ -1,3 +1,9 @@
+<style>
+    .table-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+</style>
 <div>
     <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -19,12 +25,12 @@
         </div>
     </div>
     <p class="text-danger fw-bold text-center h1">ВСЕ ОЩЕ НЕ РАБОТИ ИЗЦЯЛО!</p>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-14 mt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-bordered table-striped">
+    <div class="container-fluid mt-5">
+        <div class="row container-fluid">
+            <div class="col-12 container-fluid">
+                <div class="card container-fluid">
+                    <div class="card-body table-container">
+                        <table class="table table-responsive-sm table-bordered table-striped col-8">
                             <thead>
                                 <tr>
                                     <th>№</th>
@@ -49,7 +55,7 @@
                                 @foreach ($tasks as $task)
                                     <tr>
                                         <td><a href="{{url('/crm/pages/tasks/view/'.$task->id)}}">{{ $task->id }} </a></td>
-                                        <td id="client">{{$task->client}}</td>
+                                        <td id="client">{{$task->client->client}}</td>
                                         <td>{{$task->client_address_1}}</td>
                                         <td>{{ $task->dateOfMeasurement }}</td>
                                         <td>{{ $task->wayOfShowingDocumentation }}</td>
