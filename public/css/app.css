@@ -1,37 +1,22 @@
-fieldset {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 20px;
+:root {
+    font-size: 14px;
 }
 
-legend {
-    width: auto;
-    padding: 0 10px;
-    font-size: 1.2em;
+@media only screen and (min-width: 2560px) {
+    :root {
+        font-size: 24px;
+    }
+    #navigation_menu {
+        height: 75px;
+    }
 }
 
-form .btn {
-    margin-top: 10px;
+@media only screen and (max-width: 1366px) {
+    :root {
+        font-size: 12px;
+    }
 }
 
-.form-check-inline {
-    margin-right: 20px;
-}
-.create{
-    background-color:lightgray;
-}
-.fields{
-    width: 300px;
-}
-.center{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navbar{
-    display: flex;
-    gap:3rem;
-    color:white;
-    
+body {
+    font-size: 1rem; /* 1rem equals the font size set in :root */
 }

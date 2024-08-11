@@ -58,7 +58,7 @@ class TasksFormRequest extends FormRequest
             'client_address_2' => 'nullable|string',
             'client_address_3' => 'nullable|string',
             'client_address_4' => 'nullable|string',
-            'contragent_id' => 'required|integer',
+            'contragent' => 'required|string',
             "price_without_vat" => 'required | numeric',
         ];
 

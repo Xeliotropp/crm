@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 @auth
-<div class="bg-primary d-flex gap-4" style="height:50px">
+<div class="bg-primary d-flex gap-4" id="navigation_menu">
     <header class="container-fluid">
         <div>
             <nav>
@@ -14,7 +14,7 @@
                     <a class = "text-white" href="/crm/pages/contragents" style="text-decoration:none"><i
                             class="bi bi-person"></i>&nbsp;Контрагенти</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class = "text-white" href="/crm/pages/tasks/create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Задачи</a>
+                    <a class = "text-white" href="/crm/pages/tasks/create" style="text-decoration:none"><i class="bi bi-chat-right-text"></i>&nbsp;Създаване на задача</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class = "text-white" href="/crm/pages/tasks" style="text-decoration:none"><i class="bi bi-list-task"></i>&nbsp;Списък на задачи</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

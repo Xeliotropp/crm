@@ -14,8 +14,10 @@ class Clients extends Model
         'company_identifier',
         'vat_number',
         'contact_person',
+        'email',
         'phone_number',
         'address',
+        'contragent_client_id',
         'additional_information',
         'object_first',
         'object_second',
@@ -26,4 +28,8 @@ class Clients extends Model
         'adress_object_3',
         'adress_object_4',
     ];
+
+    public function contragents(){
+        return $this->belongsTo(Contragents::class, 'contragent_client_id', 'id');
+    }
 }

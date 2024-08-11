@@ -18,4 +18,7 @@ class Contragents extends Model
         'additional_information',
         'commision_percentage'
     ];
+    public function clients() {
+        return $this->hasMany(Clients::class, 'contragent_client_id', 'id');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientsFormRequest;
 use App\Models\Clients;
+use App\Models\Contragents;
 use Illuminate\Http\Request;
 
 class ClientsController extends Controller
@@ -15,7 +16,9 @@ class ClientsController extends Controller
 
     public function create()
     {
-        return view('pages.clients.create');
+        $clients = Clients::all();
+        $contragents = Contragents::all();
+        return view('pages.clients.create', compact('clients', 'contragents'));
     }
 
     public function store(ClientsFormRequest $request)
@@ -28,8 +31,10 @@ class ClientsController extends Controller
         $client->company_identifier = $validatedData['company_identifier'];
         $client->vat_number = $validatedData['vat_number'];
         $client->contact_person = $validatedData['contact_person'];
+        $client->email = $validatedData['email'];
         $client->phone_number = $validatedData['phone_number'];
         $client->address = $validatedData['address'];
+        $client->contragent_client_id = $validatedData['contragent_client_id'];
         $client->additional_information = $validatedData['additional_information'];
         $client->object_first = $validatedData['object_first'];
         $client->object_second = $validatedData['object_second'];
@@ -45,9 +50,11 @@ class ClientsController extends Controller
         return redirect('/crm/pages/clients')->with('success', 'Успешно добавяне на нов клиент!');
     }
 
-    public function edit(Clients $client)
+    public function edit($id)
     {
-        return view('pages.clients.edit', ['client' => $client]);
+        $client = Clients::find($id);
+        $contragents = Contragents::all();
+        return view('pages.clients.edit', compact('client','contragents'));
     }
 
     public function update(Request $request, $id)
@@ -58,8 +65,10 @@ class ClientsController extends Controller
         $client->company_identifier = $request->input('company_identifier');
         $client->vat_number = $request->input('vat_number');
         $client->contact_person = $request->input('contact_person');
+        $client->email = $request->input('email');
         $client->phone_number = $request->input('phone_number');
         $client->address = $request->input('address');
+        $client->contragent_client_id = $request->input('contragent_client_id');
         $client->additional_information = $request->input('additional_information');
         $client->object_first = $request->input('object_first');
         $client->object_second = $request->input('object_second');
@@ -77,6 +86,7 @@ class ClientsController extends Controller
 
     public function view($id){
         $client = Clients::find($id);
-        return view('pages.clients.view', compact('client'));
+        $contragents = Contragents::all();
+        return view('pages.clients.view', compact('client', 'contragents'));
     }
 }

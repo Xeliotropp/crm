@@ -17,35 +17,42 @@
                             @csrf
                             @method('put')
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="client" class="fw-bold">Име*</label>
                                     <input type="text" name="client" value="{{ old('client', $client->client) }}" class="form-control" id="client">
                                     @error('client')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="company_identifier" class="fw-bold">ЕИК*</label>
                                     <input type="text" name="company_identifier" value="{{ old('company_identifier', $client->company_identifier) }}" class="form-control" id="company_identifier">
                                     @error('company_identifier')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="vat_number">ЗДДС №</label>
                                     <input type="text" name="vat_number" class="form-control" value="{{ old('vat_number', $client->vat_number) }}">
                                     @error('vat_number')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="contact_person" class="fw-bold">Лице за контакт*</label>
                                     <input name="contact_person" type="text" class="form-control" value="{{ old('contact_person', $client->contact_person) }}">
                                     @error('contact_person')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
+                                    <label for="email">Имейл за контакт</label>
+                                    <input name="email" type="text" class="form-control" value="{{ old('email', $client->email) }}">
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
                                     <label for="phone_number" class="fw-bold">Номер за контакт*</label>
                                     <input name="phone_number" type="text" class="form-control" value="{{ old('phone_number', $client->phone_number) }}">
                                     @error('phone_number')
@@ -59,6 +66,16 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="contragent_client_id" class="fw-bold">Контрагент*</label>
+                                    <select name="contragent_client_id" id="contragent_client_id" class="form-control">
+                                        @foreach ($contragents as $contragent)
+                                            <option value="{{ $contragent->id }}" {{ $client->contragent_client_id == $contragent->id ? 'selected' : '' }}>{{ $contragent->contragent_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="col-md-12 mb-3">
                                     <label for="additional_information">Допълнителна информация</label>
                                     <textarea name="additional_information" class="form-control" rows="3">{{ old('additional_information', $client->additional_information) }}</textarea>
@@ -80,8 +97,8 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <a class="btn btn-secondary" id="hide">Редактиране на допълните адреси</a>
-                                <div class="row" id="addresses" style="display: none">
+                                {{-- <a class="btn btn-secondary" id="hide">Редактиране на допълните адреси</a> --}}
+                                {{-- <div class="row" id="addresses" style="display: none"> --}}
                                     <div class="col-md-6 mb-3">
                                         <label for="object_second">Обект 2</label>
                                         <input name = "object_second" type="text" class="form-control" value="{{ old('object_first', $client->object_second) }}">
@@ -132,7 +149,7 @@
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-primary float-end">Запази</button>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                         </form>
                     </div>
                 </div>

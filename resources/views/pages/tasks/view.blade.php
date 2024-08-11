@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label for="contragentId" class="fw-bold">Контрагент*</label>
-                                        <input type="text" class="form-control" id="contragent" value="{{$task->contragent->contragent_name}}" readonly>
+                                        <input type="text" class="form-control" id="contragent" value="{{$task->contragent}}" readonly>
                                         <small id="contragentIdError" class="text-danger"></small>
                                     </div>
                                     <div class="col-md-12 mb-3">

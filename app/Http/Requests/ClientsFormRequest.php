@@ -40,6 +40,10 @@ class ClientsFormRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'email'=> [
+                'nullable',
+                'string'
+            ],
             'phone_number' => [
                 'required',
                 'string',
@@ -48,6 +52,10 @@ class ClientsFormRequest extends FormRequest
             'address' => [
                 'required',
                 'string'
+            ],
+            'contragent_client_id' => [
+                'required',
+                'integer'
             ],
             'additional_information' => [
                 'nullable',

@@ -11,7 +11,6 @@ class Tasks extends Model
 
     protected $fillable = [
         'client_id',
-        'contragent_id',
         "dateOfMeasurement",
         "mk",
         "osv",
@@ -53,8 +52,5 @@ class Tasks extends Model
     ];
     public function client(){
         return $this->belongsTo(Clients::class, 'client_id', 'id');
-    }
-    public function contragent(){
-        return $this->belongsTo(Contragents::class,'contragent_id', 'id');
     }
 }

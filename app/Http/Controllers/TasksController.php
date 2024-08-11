@@ -14,9 +14,9 @@ class TasksController extends Controller
         return view("pages.tasks.index");
     }
     public function create(){
-        $clients = Clients::all();
-        $contragents = Contragents::all();
-        return view("pages.tasks.create", compact("clients", "contragents"));
+        $client = Clients::with('contragents')->get();
+        $contragent = Contragents::all();
+        return view("pages.tasks.create", compact("client", "contragent"));
     }
     public function store(TasksFormRequest $request){
         $validatedData = $request->validated();
@@ -59,34 +59,60 @@ class TasksController extends Controller
         //$task->client_address_2 = $validatedData['client_address_2'];
         //$task->client_address_3 = $validatedData['client_address_3'];
         //$task->client_address_4 = $validatedData['client_address_4'];
-        $task->contragent_id = $validatedData['contragent_id'];
-        $task->save(); 
+        $task->contragent = $validatedData['contragent'];
+        $task->save();
 
         return redirect(route('pages.tasks.index'))->with('success', 'Успешно създадена задача');
     }
 
-    public function getClientData($name)
-    {
-        $client = Clients::findOrFail($name);
-        return response()->json([
-            'object_first' => $client->object_first,
-            'object_second' => $client->object_second,
-            'object_third' => $client->object_third,
-            'object_fourth' => $client->object_fourth,
-            'contragent_id' => $client->contragent_id,
-            'client_name' => $client->client,
-        ]);
+    public function action(Request $request)
+{
+    $query = $request->input('query');
+
+    $filter_data = Clients::where('client', 'LIKE', '%' . $query . '%')
+                          ->pluck('client')
+                          ->toArray();
+
+    return response()->json($filter_data);
+}
+
+public function getClientData(Request $request)
+{
+    $client = null;
+    if ($request->has('id')) {
+        $client = Clients::with('contragents')->findOrFail($request->query('id'));
+    } elseif ($request->has('name')) {
+        $client = Clients::with('contragents')->where('client', $request->query('name'))->firstOrFail();
     }
 
-    public function getContragentData($id)
-    {
-        $contragent = Contragents::findOrFail($id);
-        return response()->json([
-            'commission_percentage' => $contragent->commission_percentage,
-            'contragent_name' => $contragent->contragent_name,
-        ]);
+    if (!$client) {
+        return response()->json(['error' => 'Client not found'], 404);
     }
 
+    return response()->json([
+        'client_id' => $client->id,
+        'client_name' => $client->client,
+        'object_first' => $client->object_first,
+        'object_second' => $client->object_second,
+        'object_third' => $client->object_third,
+        'object_fourth' => $client->object_fourth,
+        'contragent_name' => $client->contragents ? $client->contragents->contragent_name : null,
+    ]);
+}
+public function getContragentData(Request $request)
+{
+    $name = $request->query('name');
+    $contragent = Contragents::where('contragent_name', $name)->first();
+
+    if (!$contragent) {
+        return response()->json(['error' => 'Contragent not found'], 404);
+    }
+
+    return response()->json([
+        'commission_percentage' => $contragent->commission_percentage,
+        'contragent_name' => $contragent->contragent_name,
+    ]);
+}
     public function update(TasksFormRequest $request, $id){
         $validatedData = $request->validated();
         $task = Tasks::find($id);
@@ -125,9 +151,9 @@ class TasksController extends Controller
         $task->total_sum = $validatedData['total_sum'];
         $task->client_id = $validatedData['client_id'];
         $task->client_address_1 = $validatedData['client_address_1'];
-        $task->contragent_id = $validatedData['contragent_id'];
+        $task->contragent = $validatedData['contragent'];
 
-        $task->save(); 
+        $task->save();
         return redirect(route('pages.tasks.index'))->with('success', 'Успешно редактиране на задача');
     }
 
@@ -140,6 +166,7 @@ class TasksController extends Controller
 
     public function view($id){
         $task = Tasks::find($id);
-        return view('pages.tasks.view', compact('task'));
+        $client = Clients::all();
+        return view('pages.tasks.view', compact('task', 'client'));
     }
 }
