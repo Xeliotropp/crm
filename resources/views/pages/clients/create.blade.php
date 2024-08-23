@@ -24,7 +24,7 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-md-4 mb-3">
                                 <label for="company_identifier" class="fw-bold">ЕИК*</label>
                                 <input type="text" name="company_identifier" class="form-control" value="{{ old('company_identifier') }}">
@@ -68,9 +68,9 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-md-12 mb-3">
-                                <label for="contragent_client_id" class="fw-bold">Контрагент*</label>
+                                <label for="contragent_client_id" class="fw-bold"> Контрагент, предоставил контакта*</label>
                                 <select name="contragent_client_id" id="contragent_client_id" class="form-control">
                                     <option value="">Изберете контрагент</option>
                                     @foreach ($contragents as $contragent)

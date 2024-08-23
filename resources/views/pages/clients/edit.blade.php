@@ -68,7 +68,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="contragent_client_id" class="fw-bold">Контрагент*</label>
+                                    <label for="contragent_client_id" class="fw-bold"> Контрагент, предоставил контакта*</label>
                                     <select name="contragent_client_id" id="contragent_client_id" class="form-control">
                                         @foreach ($contragents as $contragent)
                                             <option value="{{ $contragent->id }}" {{ $client->contragent_client_id == $contragent->id ? 'selected' : '' }}>{{ $contragent->contragent_name }}</option>
@@ -106,7 +106,7 @@
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-    
+
                                     <div class="col-md-6 mb-3">
                                         <label for="adress_object_2">Адрес за обект 2</label>
                                         <input name = "adress_object_2" type="text" class="form-control" value="{{ old('adress_object_2', $client->adress_object_2) }}">
@@ -114,7 +114,7 @@
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-    
+
                                     <div class="col-md-6 mb-3">
                                         <label for="object_third">Обект 3</label>
                                         <input name = "object_third" type="text" class="form-control" value="{{ old('object_first', $client->object_third) }}">
@@ -122,7 +122,7 @@
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-    
+
                                     <div class="col-md-6 mb-3">
                                         <label for="adress_object_3">Адрес за обект 3</label>
                                         <input name = "adress_object_3" type="text" class="form-control" value="{{ old('adress_object_1', $client->adress_object_3) }}">
@@ -130,7 +130,7 @@
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-    
+
                                     <div class="col-md-6 mb-3">
                                         <label for="object_fourth">Обект 4</label>
                                         <input name = "object_fourth" type="text" class="form-control" value="{{ old('object_first', $client->object_fourth) }}">
