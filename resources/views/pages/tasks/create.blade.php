@@ -18,7 +18,7 @@
                                         <div class="col-md-12 mb-3">
                                             <label for="client" class="fw-bold">Клиент<span style="color:red">*</span></label>
                                             <input type="hidden" name="client_id" id="client_id" value="{{ $task->client_id ?? '' }}">
-                                            <input type="text" name="client_name" id="client" class="form-control" placeholder="Въведете име на клиент..." onchange="fetchClientData()" data-client-id="{{ $task->client_id ?? '' }}" value="{{ $task->client->client ?? '' }}" />
+                                            <input type="text" name="client" id="client" class="form-control" placeholder="Въведете име на клиент..." onchange="fetchClientData()" data-client-id="{{ $task->client_id ?? '' }}" value="{{ $task->client->client ?? '' }}" />
                                             @error('client')
                                                 <small id="clientError" class="text-danger">{{ $message }}</small>
                                             @enderror
@@ -318,19 +318,13 @@
                     // Clear existing options
                     addressSelect.innerHTML = '<option value="">Изберете обект</option>';
 
-                    // Add new options based on the client's addresses
-                    if (data.object_first) {
-                        addAddressOption(addressSelect, data.object_first, 'object1');
-                    }
-                    if (data.object_second) {
-                        addAddressOption(addressSelect, data.object_second, 'object2');
-                    }
-                    if (data.object_third) {
-                        addAddressOption(addressSelect, data.object_third, 'object3');
-                    }
-                    if (data.object_fourth) {
-                        addAddressOption(addressSelect, data.object_fourth, 'object4');
-                    }
+                    // Add new options based on the client's objects
+                    data.objects.forEach(object => {
+                        const option = document.createElement('option');
+                        option.value = object.object;
+                        option.textContent = object.object;
+                        addressSelect.appendChild(option);
+                    });
 
                     // Set client ID
                     clientIdInput.value = data.client_id;

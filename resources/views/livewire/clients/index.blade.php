@@ -33,14 +33,8 @@
                             <th>Телефон</th>
                             <th>Адрес</th>
                             <th>Допълнителна информация</th>
-                            <th>Обект 1</th>
-                            <th>Обект 1 адрес</th>
-                            <th>Обект 2</th>
-                            <th>Обект 2 адрес</th>
-                            <th>Обект 3</th>
-                            <th>Обект 3 адрес</th>
-                            <th>Обект 4</th>
-                            <th>Обект 4 адрес</th>
+                            {{-- <th>Обект</th> --}}
+                            {{-- <th>Адрес на обекта</th> --}}
                             <th>Действие</th>
                         </tr>
                     </thead>
@@ -54,14 +48,16 @@
                                 <td>{{ $client->phone_number }}</td>
                                 <td>{{ $client->address }}</td>
                                 <td>{{ $client->additional_information }}</td>
-                                <td>{{ $client->object_first }}</td>
-                                <td>{{ $client->adress_object_1 }}</td>
-                                <td>{{ $client->object_second }}</td>
-                                <td>{{ $client->adress_object_2 }}</td>
-                                <td>{{ $client->object_third }}</td>
-                                <td>{{ $client->adress_object_3 }}</td>
-                                <td>{{ $client->object_fourth }}</td>
-                                <td>{{ $client->adress_object_4 }}</td>
+                                {{-- <td>
+                                    @foreach ($client->objects as $object)
+                                        {{ $object->object }}<br>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($client->objects as $object)
+                                        {{ $object->object_address }}<br>
+                                    @endforeach
+                                </td> --}}
 
                                 <td>
                                     <div class="d-flex w-auto gap-3">

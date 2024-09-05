@@ -383,49 +383,34 @@
                     }, function(data) {
                         return process(data);
                     });
-                },
-                afterSelect: function(item) {
-                    fetchClientData();
                 }
             });
         });
 
-        function fetchClientData(clientId = null) {
+        function fetchClientData() {
             const clientName = document.getElementById('client').value;
-            if (!clientName && !clientId) return;
+            if (!clientName) return;
 
-            const url = clientId ?
-                `{{ route('pages.tasks.getData') }}?id=${encodeURIComponent(clientId)}` :
-                `{{ route('pages.tasks.getData') }}?name=${encodeURIComponent(clientName)}`;
-
-            fetch(url)
+            fetch(`{{ route('pages.tasks.getData') }}?name=${encodeURIComponent(clientName)}`)
                 .then(response => response.json())
                 .then(data => {
                     const addressSelect = document.getElementById('client_address_1');
                     const contragentInput = document.getElementById('contragent');
                     const clientIdInput = document.getElementById('client_id');
-                    const clientNameInput = document.getElementById('client');
 
                     // Clear existing options
                     addressSelect.innerHTML = '<option value="">Изберете обект</option>';
 
-                    // Add new options based on the client's addresses
-                    if (data.object_first) {
-                        addAddressOption(addressSelect, data.object_first, 'object1');
-                    }
-                    if (data.object_second) {
-                        addAddressOption(addressSelect, data.object_second, 'object2');
-                    }
-                    if (data.object_third) {
-                        addAddressOption(addressSelect, data.object_third, 'object3');
-                    }
-                    if (data.object_fourth) {
-                        addAddressOption(addressSelect, data.object_fourth, 'object4');
-                    }
+                    // Add new options based on the client's objects
+                    data.objects.forEach(object => {
+                        const option = document.createElement('option');
+                        option.value = object.object;
+                        option.textContent = object.object;
+                        addressSelect.appendChild(option);
+                    });
 
-                    // Set client ID and name
+                    // Set client ID
                     clientIdInput.value = data.client_id;
-                    clientNameInput.value = data.client_name;
 
                     // Set contragent
                     if (data.contragent_name) {
@@ -433,14 +418,10 @@
                     } else {
                         contragentInput.value = '';
                     }
-
-                    // Fetch contragent data
-                    if (data.contragent_name) {
-                        fetchContragentData();
-                    }
                 })
                 .catch(error => console.error('Error:', error));
         }
+
 
         function addAddressOption(selectElement, address, id) {
             const option = document.createElement('option');

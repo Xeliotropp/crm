@@ -6,6 +6,7 @@ use App\Http\Requests\TasksFormRequest;
 use App\Models\Clients;
 use App\Models\Contragents;
 use App\Models\Tasks;
+use App\Models\Objects;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -16,9 +17,9 @@ class TasksController extends Controller
     }
     public function create()
     {
-        $client = Clients::with('contragents')->get();
-        $contragent = Contragents::all();
-        return view("pages.tasks.create", compact("client", "contragent"));
+        $clients = Clients::with('contragents')->get();
+        $contragents = Contragents::all();
+        return view("pages.tasks.create", compact("clients", "contragents"));
     }
     public function store(TasksFormRequest $request)
     {
@@ -88,9 +89,9 @@ class TasksController extends Controller
     {
         $client = null;
         if ($request->has('id')) {
-            $client = Clients::with('contragents')->findOrFail($request->query('id'));
+            $client = Clients::with(['contragents', 'objects'])->findOrFail($request->query('id'));
         } elseif ($request->has('name')) {
-            $client = Clients::with('contragents')->where('client', $request->query('name'))->firstOrFail();
+            $client = Clients::with(['contragents', 'objects'])->where('client', $request->query('name'))->firstOrFail();
         }
 
         if (!$client) {
@@ -100,13 +101,11 @@ class TasksController extends Controller
         return response()->json([
             'client_id' => $client->id,
             'client_name' => $client->client,
-            'object_first' => $client->object_first,
-            'object_second' => $client->object_second,
-            'object_third' => $client->object_third,
-            'object_fourth' => $client->object_fourth,
+            'objects' => $client->objects,
             'contragent_name' => $client->contragents ? $client->contragents->contragent_name : null,
         ]);
     }
+
     public function getContragentData(Request $request)
     {
         $name = $request->query('name');

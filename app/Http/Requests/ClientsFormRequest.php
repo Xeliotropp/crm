@@ -22,76 +22,18 @@ class ClientsFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'client' => [
-                'required',
-                'string'
-            ],
-            'company_identifier' => [
-                'required',
-                'string',
-                'max:15'
-            ],
-            'vat_number' => [
-                'nullable',
-                'string',
-                'max:17'
-            ],
-            'contact_person' => [
-                'required',
-                'string'
-            ],
-            'email'=> [
-                'nullable',
-                'string'
-            ],
-            'phone_number' => [
-                'required',
-                'string',
-                'max:10'
-            ],
-            'address' => [
-                'required',
-                'string'
-            ],
-            'contragent_client_id' => [
-                'required',
-                'integer'
-            ],
-            'additional_information' => [
-                'nullable',
-            ],
-            'object_first' => [
-                'required',
-                'string'
-            ],
-            'object_second' => [
-                'nullable',
-                'string'
-            ],
-            'object_third' => [
-                'nullable',
-                'string'
-            ],
-            'object_fourth' => [
-                'nullable',
-                'string'
-            ],
-            'adress_object_1' => [
-                'nullable',
-                'string',
-            ],
-            'adress_object_2' => [
-                'nullable',
-                'string',
-            ],
-            'adress_object_3' => [
-                'nullable',
-                'string',
-            ],
-            'adress_object_4' => [
-                'nullable',
-                'string',
-            ],
+            'client' => 'required|string',
+            'company_identifier' => 'required|string|max:15',
+            'vat_number' => 'nullable|string|max:17',
+            'contact_person' => 'required|string',
+            'email' => 'nullable|string',
+            'phone_number' => 'required|string|max:10',
+            'address' => 'required|string',
+            'contragent_client_id' => 'required|integer',
+            'additional_information' => 'nullable|string',
+            'objects' => 'required|array',
+            'objects.*.object' => 'required|string',
+            'objects.*.object_address' => 'nullable|string',
         ];
     }
 }

@@ -88,72 +88,29 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="object_first" class="fw-bold">Обект 1*</label>
-                                <input name="object_first" type="text" class="form-control" value="{{ old('object_first') }}">
-                                @error('object_first')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                            <div id="objectsContainer">
+                                <div class="row object-group">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="objects[0][object]" class="fw-bold">Обект 1*</label>
+                                        <input name="objects[0][object]" type="text" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="objects[0][object_address]">Адрес за обект 1</label>
+                                        <input name="objects[0][object_address]" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-danger remove-object" style="display: none;">Премахни</button>
+                                </div>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="adress_object_1">Адрес за обект 1</label>
-                                <input name="adress_object_1" type="text" class="form-control" value="{{ old('adress_object_1') }}">
-                                @error('adress_object_1')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                            <div class="col-md-12 mb-5 d-flex align-items-center justify-content-center">
+                                <button type="button" id="addObject" class="btn btn-primary">Добави още един обект</button>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="object_second">Обект 2</label>
-                                <input name="object_second" type="text" class="form-control" value="{{ old('object_second') }}">
-                                @error('object_second')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="adress_object_2">Адрес за обект 2</label>
-                                <input name="adress_object_2" type="text" class="form-control" value="{{ old('adress_object_2') }}">
-                                @error('adress_object_2')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="object_third">Обект 3</label>
-                                <input name="object_third" type="text" class="form-control" value="{{ old('object_third') }}">
-                                @error('object_third')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="adress_object_3">Адрес за обект 3</label>
-                                <input name="adress_object_3" type="text" class="form-control" value="{{ old('adress_object_3') }}">
-                                @error('adress_object_3')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="object_fourth">Обект 4</label>
-                                <input name="object_fourth" type="text" class="form-control" value="{{ old('object_fourth') }}">
-                                @error('object_fourth')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="adress_object_4">Адрес за обект 4</label>
-                                <input name="adress_object_4" type="text" class="form-control" value="{{ old('adress_object_4') }}">
-                                @error('adress_object_4')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md-12 mb-3 mt-3 d-flex align-items-center justify-content-center">
-                                <button type="submit" class="btn btn-success text-center">Добави</button>
-                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3 mt-5 d-flex align-items-center justify-content-center">
+                            <button type="submit" class="btn btn-success text-center">Добави</button>
                         </div>
                     </form>
                 </div>
@@ -165,11 +122,56 @@
 
 @push('scripts')
     <script>
-        const hider = document.getElementById('hide');
-        const addresses = document.getElementById('addresses');
+        document.addEventListener('DOMContentLoaded', function() {
+        const objectsContainer = document.getElementById('objectsContainer');
+        const addObjectButton = document.getElementById('addObject');
+        let objectCount = 1;
 
-        hider.addEventListener("click", e =>{
-            addresses.style.display = "inherit";
+        addObjectButton.addEventListener('click', function() {
+            objectCount++;
+            const newObjectGroup = document.createElement('div');
+            newObjectGroup.className = 'row object-group';
+            newObjectGroup.innerHTML = `
+                <div class="col-md-6 mb-3">
+                    <label for="objects[${objectCount-1}][object]" class="fw-bold">Обект ${objectCount}*</label>
+                    <input name="objects[${objectCount-1}][object]" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label for="objects[${objectCount-1}][object_address]">Адрес за обект ${objectCount}</label>
+                    <input name="objects[${objectCount-1}][object_address]" type="text" class="form-control">
+                </div>
+                <div class="col-md-1 mb-3 d-flex align-items-end">
+                    <button type="button" class="btn btn-danger remove-object">Премахни</button>
+                </div>
+            `;
+            objectsContainer.appendChild(newObjectGroup);
         });
+
+        objectsContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-object')) {
+                e.target.closest('.object-group').remove();
+                updateObjectNumbers();
+            }
+        });
+
+        function updateObjectNumbers() {
+            const objectGroups = objectsContainer.querySelectorAll('.object-group');
+            objectGroups.forEach((group, index) => {
+                const objectLabel = group.querySelector('label[for^="objects"]');
+                const objectInput = group.querySelector('input[name^="objects"][name$="[object]"]');
+                const addressLabel = group.querySelector('label[for^="objects"][for$="[object_address]"]');
+                const addressInput = group.querySelector('input[name^="objects"][name$="[object_address]"]');
+
+                objectLabel.setAttribute('for', `objects[${index}][object]`);
+                objectLabel.textContent = `Обект ${index + 1}*`;
+                objectInput.setAttribute('name', `objects[${index}][object]`);
+
+                addressLabel.setAttribute('for', `objects[${index}][object_address]`);
+                addressLabel.textContent = `Адрес за обект ${index + 1}`;
+                addressInput.setAttribute('name', `objects[${index}][object_address]`);
+            });
+            objectCount = objectGroups.length;
+        }
+    });
     </script>
 @endpush

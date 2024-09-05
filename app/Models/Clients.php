@@ -32,4 +32,7 @@ class Clients extends Model
     public function contragents(){
         return $this->belongsTo(Contragents::class, 'contragent_client_id', 'id');
     }
+    public function objects() {
+        return $this->belongsToMany(Objects::class, 'client_object', 'client_id', 'object_id');
+    }
 }

@@ -67,7 +67,7 @@
                                             id="date_measure">
                                     </div>
                                 </th>
-                                
+
                                 <th>Номер на сертификат
                                     <div class="d-flex mt-4">
                                         <button  wire:click="refreshPage" class="btn btn-white border border-2 border-end-0 rounded-0">
@@ -88,7 +88,7 @@
                                             id="cert_date">
                                     </div>
                                 </th>
-                                
+
                                 <th>Номер на фактура
                                     <div class="d-flex mt-4">
                                         <button  wire:click="refreshPage" class="btn btn-white border border-2 border-end-0 rounded-0">

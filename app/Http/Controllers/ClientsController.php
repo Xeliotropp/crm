@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientsFormRequest;
 use App\Models\Clients;
+use App\Models\Objects;
 use App\Models\Contragents;
 use Illuminate\Http\Request;
 
@@ -22,28 +23,30 @@ class ClientsController extends Controller
     }
 
     public function store(ClientsFormRequest $request)
-    { 
+    {
         $validatedData = $request->validated();
 
         $client = new Clients();
 
-        $client->client = $validatedData['client'];
-        $client->company_identifier = $validatedData['company_identifier'];
-        $client->vat_number = $validatedData['vat_number'];
-        $client->contact_person = $validatedData['contact_person'];
-        $client->email = $validatedData['email'];
-        $client->phone_number = $validatedData['phone_number'];
-        $client->address = $validatedData['address'];
-        $client->contragent_client_id = $validatedData['contragent_client_id'];
-        $client->additional_information = $validatedData['additional_information'];
-        $client->object_first = $validatedData['object_first'];
-        $client->object_second = $validatedData['object_second'];
-        $client->object_third = $validatedData['object_third'];
-        $client->object_fourth = $validatedData['object_fourth'];
-        $client->adress_object_1 = $validatedData['adress_object_1'];
-        $client->adress_object_2 = $validatedData['adress_object_2'];
-        $client->adress_object_3 = $validatedData['adress_object_3'];
-        $client->adress_object_4 = $validatedData['adress_object_4'];
+        $client = Clients::create([
+            'client' => $validatedData['client'],
+            'company_identifier' => $validatedData['company_identifier'],
+            'vat_number' => $validatedData['vat_number'],
+            'contact_person' => $validatedData['contact_person'],
+            'email' => $validatedData['email'],
+            'phone_number' => $validatedData['phone_number'],
+            'address' => $validatedData['address'],
+            'contragent_client_id' => $validatedData['contragent_client_id'],
+            'additional_information' => $validatedData['additional_information'],
+        ]);
+
+        foreach ($validatedData['objects'] as $objectData) {
+            $object = Objects::create([
+                'object' => $objectData['object'],
+                'object_address' => $objectData['object_address'],
+            ]);
+            $client->objects()->attach($object->id);
+        }
 
         $client->save();
 
@@ -52,41 +55,49 @@ class ClientsController extends Controller
 
     public function edit($id)
     {
-        $client = Clients::find($id);
+        $client = Clients::with('objects')->findOrFail($id);
         $contragents = Contragents::all();
-        return view('pages.clients.edit', compact('client','contragents'));
+        $objects = $client->objects;
+        return view('pages.clients.edit', compact('client','contragents', 'objects'));
     }
 
-    public function update(Request $request, $id)
-    {   
-        $client = Clients::find($id);
-        
-        $client->client = $request->input('client');
-        $client->company_identifier = $request->input('company_identifier');
-        $client->vat_number = $request->input('vat_number');
-        $client->contact_person = $request->input('contact_person');
-        $client->email = $request->input('email');
-        $client->phone_number = $request->input('phone_number');
-        $client->address = $request->input('address');
-        $client->contragent_client_id = $request->input('contragent_client_id');
-        $client->additional_information = $request->input('additional_information');
-        $client->object_first = $request->input('object_first');
-        $client->object_second = $request->input('object_second');
-        $client->object_third = $request->input('object_third');
-        $client->object_fourth = $request->input('object_fourth');
-        $client->adress_object_1 = $request->input('adress_object_1');
-        $client->adress_object_2 = $request->input('adress_object_2');
-        $client->adress_object_3 = $request->input('adress_object_3');
-        $client->adress_object_4 = $request->input('adress_object_4');
+    public function update(ClientsFormRequest $request, $id)
+{
+    $validatedData = $request->validated();
 
-        $client->save();
+    $client = Clients::findOrFail($id);
 
-        return redirect('/crm/pages/clients')->with('success', 'Успешно редактиране на клиент');
+    // Update client data
+    $client->update([
+        'client' => $validatedData['client'],
+        'company_identifier' => $validatedData['company_identifier'],
+        'vat_number' => $validatedData['vat_number'],
+        'contact_person' => $validatedData['contact_person'],
+        'email' => $validatedData['email'],
+        'phone_number' => $validatedData['phone_number'],
+        'address' => $validatedData['address'],
+        'contragent_client_id' => $validatedData['contragent_client_id'],
+        'additional_information' => $validatedData['additional_information'],
+    ]);
+
+    // Handle updating of objects
+    $client->objects()->detach();  // Detach all related objects
+
+    foreach ($validatedData['objects'] as $objectData) {
+        $object = Objects::create([
+            'object' => $objectData['object'],
+            'object_address' => $objectData['object_address'],
+        ]);
+        $client->objects()->attach($object->id);
     }
+
+    return redirect('/crm/pages/clients')->with('success', 'Успешно редактиране на клиент');
+}
 
     public function view($id){
-        $client = Clients::find($id);
+        $client = Clients::with('objects')->findOrFail($id);
         $contragents = Contragents::all();
-        return view('pages.clients.view', compact('client', 'contragents'));
+        $objects = $client->objects;
+        return view('pages.clients.view', compact('client','contragents', 'objects'));
     }
 }
